@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LoremIpsum } from 'lorem-ipsum'; // Importing LoremIpsum from lorem-ipsum package
+import { LoremIpsum } from 'lorem-ipsum';
 import bg from "../assets/bg.png";
 import bg1 from "../assets/bg1.png";
 
-const lorem = new LoremIpsum(); // Creating an instance of LoremIpsum
+const lorem = new LoremIpsum();
 
 const Navbar = styled.nav`
   display: flex;
@@ -60,16 +60,17 @@ const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 `;
 
 const SchoolInfo = styled.div`
   margin-top: 20px;
-  text-align: center;
 `;
 
 const SchoolImage = styled.img`
   max-width: 100%;
   height: auto;
+  margin-top: 20px; /* Add margin to move image slightly below the text */
 `;
 
 const Title = styled.h1`
@@ -78,7 +79,7 @@ const Title = styled.h1`
 `;
 
 const Home = () => {
-  const loremText = lorem.generateParagraphs(1); // Generating Lorem Ipsum text
+  const loremText = lorem.generateParagraphs(1);
 
   return (
     <>
@@ -96,10 +97,10 @@ const Home = () => {
       </Navbar>
       <HomeContainer>
         <SchoolInfo>
-          <SchoolImage src={bg} alt="School" />
-          <Title>School Management System</Title>
+          <Title>Hospital Management System</Title>
+          <p>{loremText}</p>
         </SchoolInfo>
-        <p>{loremText}</p>
+        <SchoolImage src={bg} alt="Hospital" />
       </HomeContainer>
     </>
   );
