@@ -107,7 +107,7 @@ const Home = () => {
         </NavigationLinks>
         <ButtonsContainer>
           <LoginButton onClick={handleLoginClick}>Login</LoginButton>
-          <GuestButton>Guest Mode</GuestButton>
+          <GuestButton onClick={handleLoginClick}>Guest Mode</GuestButton>
         </ButtonsContainer>
       </Navbar>
       <HomeContainer>
