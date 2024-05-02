@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Sidebar from './Sidebar';
 
-const AdminDashboardContainer = styled.div`
+const TeacherDashboardContainer = styled.div`
   display: flex;
 `;
 
@@ -43,9 +43,9 @@ const CardContent = styled.p`
   color: #555555;
 `;
 
-const AdminDashboard = () => {
+const TeacherDashboard = () => {
   return (
-    <AdminDashboardContainer>
+    <TeacherDashboardContainer>
       <Sidebar />
       <Content>
         <Section>
@@ -78,8 +78,8 @@ const AdminDashboard = () => {
 
         {/* Add more sections for other parts of the admin dashboard */}
       </Content>
-    </AdminDashboardContainer>
+    </TeacherDashboardContainer>
   );
 };
 
-export default AdminDashboard;
+export default TeacherDashboard;

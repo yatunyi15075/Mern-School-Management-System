@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const StudentSignInContainer = styled.div`
   display: flex;
@@ -43,16 +44,16 @@ const StudentSignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle admin sign-in logic here
-    console.log('Admin Sign In:', { email, password });
+  const handleSignIn = () => {
+    // For demonstration purposes, we'll directly navigate to the admin dashboard route
+    // Replace this with your actual sign-in logic
+    console.log('Student Sign In:', { email, password });
   };
 
   return (
     <StudentSignInContainer>
       <h2>Student Sign In</h2>
-      <FormContainer onSubmit={handleSubmit}>
+      <FormContainer>
         <InputField
           type="email"
           placeholder="Email"
@@ -66,8 +67,11 @@ const StudentSignIn = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-        />
-        <SubmitButton type="submit">Sign In</SubmitButton>
+        /> 
+        {/* Use Link component to navigate to admin dashboard */}
+        <Link to="/student/dashboard">
+          <SubmitButton onClick={handleSignIn}>Sign In</SubmitButton>
+        </Link>
       </FormContainer>
     </StudentSignInContainer>
   );

@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { BsGraphUp, BsPeople, BsPerson, BsFileText, BsBook, BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCalendarEvent, BsQuestionSquare } from 'react-icons/bs';
+import { BsGraphUp, 
+  BsPeople, 
+  BsPerson, 
+  BsFileText, 
+  BsBook, 
+  BsGraphDown, 
+  BsCalendar, 
+  BsGear, 
+  BsChatDots, 
+ } from 'react-icons/bs';
 
 
 const SidebarContainer = styled.div`
@@ -53,8 +62,8 @@ const Logo = styled.img`
 
 const ToggleButton = styled.div`
   position: absolute;
-  top: 20px; /* Adjust the top position as needed */
-  right: 0; /* Position it at the right edge of the sidebar */
+  top: 20px; 
+  right: 0; 
   width: 30px;
   height: 30px;
   background-color: #1e1e23;
@@ -84,55 +93,39 @@ const Sidebar = () => {
         <SidebarHeader>
         <Logo src={"../assets/bg1.png"} alt="Logo" />
       </SidebarHeader>
-      <SidebarHeader>Admin</SidebarHeader>
+      <SidebarHeader>Student</SidebarHeader>
       <SidebarNav>
         <SidebarNavItem>
           <SidebarIcon><BsGraphUp /></SidebarIcon>
-          <StyledLink to="/admin/dashboard">Dashboard</StyledLink>
-        </SidebarNavItem>
-        <SidebarNavItem>
-          <SidebarIcon><BsPeople /></SidebarIcon>
-          <StyledLink to="/admin/classes">Classes</StyledLink>
-        </SidebarNavItem>
-        <SidebarNavItem>
-          <SidebarIcon><BsPeople /></SidebarIcon>
-          <StyledLink to="/admin/classes">Students</StyledLink>
-        </SidebarNavItem>
-        <SidebarNavItem>
-          <SidebarIcon><BsPerson /></SidebarIcon>
-          <StyledLink to="/admin/teachers">Teachers</StyledLink>
+          <StyledLink to="/student/dashboard">Dashboard</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsFileText /></SidebarIcon>
-          <StyledLink to="/admin/assignments">Assignments</StyledLink>
+          <StyledLink to="/student/assignments">Assignments</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsBook /></SidebarIcon>
-          <StyledLink to="/admin/exams">Exams</StyledLink>
+          <StyledLink to="/student/exams">Exams</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsGraphDown /></SidebarIcon>
-          <StyledLink to="/admin/performance">Performance</StyledLink>
+          <StyledLink to="/student/performance">Performance</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsCalendar /></SidebarIcon>
-          <StyledLink to="/admin/attendance">Attendance</StyledLink>
+          <StyledLink to="/student/attendance">Attendance</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
         <SidebarIcon><BsBook /></SidebarIcon>
-          <StyledLink to="/admin/library">Library </StyledLink>
+          <StyledLink to="/student/library">Library </StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsChatDots /></SidebarIcon>
-          <StyledLink to="/admin/communication">Announcement</StyledLink>
-        </SidebarNavItem>
-        <SidebarNavItem>
-          <SidebarIcon><BsCalendarEvent /></SidebarIcon>
-          <StyledLink to="/admin/events">Events & Calendar</StyledLink>
+          <StyledLink to="/student/communication">Announcement</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsGear /></SidebarIcon>
-          <StyledLink to="/admin/settings">Settings & Profile</StyledLink>
+          <StyledLink to="/student/settings">Profile</StyledLink>
         </SidebarNavItem>
         
       </SidebarNav>

@@ -6,6 +6,8 @@ import AdminSignIn from '../src/components/AdminSignIn';
 import StudentSignIn from '../src/components/StudentSignIn';
 import TeacherSignIn from '../src/components/TeacherSignIn';
 import AdminDashboard from '../src/pages/Admin/Dashboard';
+import StudentDashboard from '../src/pages/Students/Dashboard';
+import TeacherDashboard from '../src/pages/Teachers/Dashboard';
 
 const App = () => {
   return (
@@ -17,6 +19,9 @@ const App = () => {
         <Route exact path="/student-signIn" element={<StudentSignIn />} />
         <Route exact path="/teacher-signIn" element={<TeacherSignIn />} />
         <Route exact path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route exact path="/teacher/dashboard" element={<TeacherDashboard />} />        
+        <Route exact path="/student/dashboard" element={<StudentDashboard />} />
+
       </Routes>
     </Router>
   );

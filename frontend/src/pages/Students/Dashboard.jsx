@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Sidebar from './Sidebar';
 
-const AdminDashboardContainer = styled.div`
+const StudentDashboardContainer = styled.div`
   display: flex;
 `;
 
@@ -43,25 +43,25 @@ const CardContent = styled.p`
   color: #555555;
 `;
 
-const AdminDashboard = () => {
+const StudentDashboard = () => {
   return (
-    <AdminDashboardContainer>
+    <StudentDashboardContainer>
       <Sidebar />
       <Content>
         <Section>
           <SectionTitle>Overview</SectionTitle>
           <CardContainer>
             <Card>
-              <CardTitle>Total Students</CardTitle>
+              <CardTitle>Assignments</CardTitle>
+              <CardContent>5</CardContent>
+            </Card>
+            <Card>
+              <CardTitle>Performance</CardTitle>
               <CardContent>500</CardContent>
             </Card>
             <Card>
-              <CardTitle>Total Teachers</CardTitle>
-              <CardContent>50</CardContent>
-            </Card>
-            <Card>
-              <CardTitle>Total Classes</CardTitle>
-              <CardContent>50</CardContent>
+              <CardTitle>Term</CardTitle>
+              <CardContent>1</CardContent>
             </Card>
           </CardContainer>
         </Section>
@@ -78,8 +78,8 @@ const AdminDashboard = () => {
 
         {/* Add more sections for other parts of the admin dashboard */}
       </Content>
-    </AdminDashboardContainer>
+    </StudentDashboardContainer>
   );
 };
 
-export default AdminDashboard;
+export default StudentDashboard;

@@ -67,7 +67,7 @@ const AdminSignIn = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-        />
+        /> 
         {/* Use Link component to navigate to admin dashboard */}
         <Link to="/admin/dashboard">
           <SubmitButton onClick={handleSignIn}>Sign In</SubmitButton>
