@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import { BsGraphUp, BsPeople, BsPerson, BsFileText, BsBook, BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCalendarEvent, BsQuestionSquare } from 'react-icons/bs';
-
 
 const SidebarContainer = styled.div`
   position: relative;
@@ -11,6 +10,7 @@ const SidebarContainer = styled.div`
   color: white;
   padding-top: 60px;
 `;
+
 const SidebarHeader = styled.div`
   padding: 20px;
   font-size: 24px;
@@ -64,6 +64,7 @@ const ToggleButton = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
 const ToggleIcon = styled.span`
   color: white;
   font-size: 20px;
@@ -75,14 +76,13 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   const toggleSidebar = () => {
-    console.log('Toggle Sidebar');
     setIsOpen(!isOpen);
   };
   
   return (
     <SidebarContainer>
-        <SidebarHeader>
-        <Logo src={"../assets/bg1.png"} alt="Logo" />
+      <SidebarHeader>
+        <Logo src="../assets/bg1.png" alt="Logo" />
       </SidebarHeader>
       <SidebarHeader>Admin</SidebarHeader>
       <SidebarNav>
@@ -96,7 +96,7 @@ const Sidebar = () => {
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsPeople /></SidebarIcon>
-          <StyledLink to="/admin/classes">Students</StyledLink>
+          <StyledLink to="/admin/students">Students</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsPerson /></SidebarIcon>
@@ -119,8 +119,8 @@ const Sidebar = () => {
           <StyledLink to="/admin/attendance">Attendance</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
-        <SidebarIcon><BsBook /></SidebarIcon>
-          <StyledLink to="/admin/library">Library </StyledLink>
+          <SidebarIcon><BsBook /></SidebarIcon>
+          <StyledLink to="/admin/library">Library</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsChatDots /></SidebarIcon>
@@ -134,7 +134,6 @@ const Sidebar = () => {
           <SidebarIcon><BsGear /></SidebarIcon>
           <StyledLink to="/admin/settings">Settings & Profile</StyledLink>
         </SidebarNavItem>
-        
       </SidebarNav>
       <ToggleButton onClick={toggleSidebar}>
         <ToggleIcon isOpen={isOpen}>▲</ToggleIcon>

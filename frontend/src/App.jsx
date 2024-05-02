@@ -8,6 +8,7 @@ import TeacherSignIn from '../src/components/TeacherSignIn';
 import AdminDashboard from '../src/pages/Admin/Dashboard';
 import StudentDashboard from '../src/pages/Students/Dashboard';
 import TeacherDashboard from '../src/pages/Teachers/Dashboard';
+import Classes from '../src/pages/Admin/Classes';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route exact path="/admin/dashboard" element={<AdminDashboard />} />
         <Route exact path="/teacher/dashboard" element={<TeacherDashboard />} />        
         <Route exact path="/student/dashboard" element={<StudentDashboard />} />
+        <Route exact path="/admin/classes" element={<Classes />} />
 
       </Routes>
     </Router>
