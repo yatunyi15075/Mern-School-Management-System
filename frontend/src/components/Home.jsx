@@ -4,6 +4,7 @@ import { LoremIpsum } from 'lorem-ipsum';
 import bg from "../assets/bg.png";
 import bg1 from "../assets/bg1.png";
 import hero from "../assets/hero.jpg"; // Import the hero background image
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 
 const lorem = new LoremIpsum();
 
@@ -87,7 +88,13 @@ const LoremTextContainer = styled.div`
 `;
 
 const Home = () => {
+  const navigate = useNavigate(); // Access the navigate function using useNavigate hook
   const loremText = lorem.generateParagraphs(1);
+
+  const handleLoginClick = () => {
+    // Navigate to the "/choose-user" route when Login button is clicked
+    navigate('/choose-user');
+  };
 
   return (
     <>
@@ -99,7 +106,7 @@ const Home = () => {
           <NavLink href="#">Contact Us</NavLink>
         </NavigationLinks>
         <ButtonsContainer>
-          <LoginButton>Login</LoginButton>
+          <LoginButton onClick={handleLoginClick}>Login</LoginButton>
           <GuestButton>Guest Mode</GuestButton>
         </ButtonsContainer>
       </Navbar>
