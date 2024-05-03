@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Sidebar from './Sidebar';
 
@@ -33,33 +33,26 @@ const AnnouncementItem = styled.li`
   margin-bottom: 20px;
 `;
 
-const AnnouncementTitle = styled.h3`
-  margin-bottom: 10px;
-`;
-
-const AnnouncementContent = styled.p`
-  color: #555;
+const AddAnnouncementButton = styled.button`
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 `;
 
 const AnnouncementSection = () => {
   // Sample announcement data
-  const announcements = [
-    {
-      id: 1,
-      title: 'Important Notice',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-    },
-    {
-      id: 2,
-      title: 'Upcoming Exam Schedule',
-      content: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    },
-    {
-      id: 3,
-      title: 'Holiday Announcement',
-      content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-    }
-  ];
+  const [announcements, setAnnouncements] = useState([
+    { id: 1, title: 'Important Announcement', message: 'This is an important announcement from the administration.' },
+    { id: 2, title: 'Class Announcement', message: 'Reminder: Tomorrow is the deadline for the assignment.' }
+  ]);
+
+  const handleAddAnnouncement = () => {
+    // Implement add announcement functionality here
+    console.log('Adding announcement...');
+  };
 
   return (
     <AnnouncementContainer>
@@ -68,11 +61,12 @@ const AnnouncementSection = () => {
       </SidebarContainer>
       <Content>
         <AnnouncementHeader>Announcements</AnnouncementHeader>
+        <AddAnnouncementButton onClick={handleAddAnnouncement}>Add Announcement</AddAnnouncementButton>
         <AnnouncementList>
           {announcements.map((announcement) => (
             <AnnouncementItem key={announcement.id}>
-              <AnnouncementTitle>{announcement.title}</AnnouncementTitle>
-              <AnnouncementContent>{announcement.content}</AnnouncementContent>
+              <h3>{announcement.title}</h3>
+              <p>{announcement.message}</p>
             </AnnouncementItem>
           ))}
         </AnnouncementList>
