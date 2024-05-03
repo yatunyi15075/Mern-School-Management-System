@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Sidebar from './Sidebar'; // Import the Sidebar component
 
 const ClassesContainer = styled.div`
+  display: flex;
+`;
+
+const Content = styled.div`
+  flex: 1;
+`;
+
+const ClassesContent = styled.div`
   padding: 20px;
 `;
 
@@ -57,21 +66,26 @@ const Classes = () => {
 
   return (
     <ClassesContainer>
-      <ClassesHeader>Classes</ClassesHeader>
-      <AddClassForm onSubmit={handleAddClass}>
-        <AddClassInput
-          type="text"
-          placeholder="Enter class name"
-          value={newClassName}
-          onChange={(e) => setNewClassName(e.target.value)}
-        />
-        <AddClassButton type="submit">Add Class</AddClassButton>
-      </AddClassForm>
-      <ClassList>
-        {classes.map((className, index) => (
-          <ClassItem key={index}>{className}</ClassItem>
-        ))}
-      </ClassList>
+      <Sidebar /> {/* Include the Sidebar component */}
+      <Content>
+        <ClassesContent>
+          <ClassesHeader>Classes</ClassesHeader>
+          <AddClassForm onSubmit={handleAddClass}>
+            <AddClassInput
+              type="text"
+              placeholder="Enter class name"
+              value={newClassName}
+              onChange={(e) => setNewClassName(e.target.value)}
+            />
+            <AddClassButton type="submit">Add Class</AddClassButton>
+          </AddClassForm>
+          <ClassList>
+            {classes.map((className, index) => (
+              <ClassItem key={index}>{className}</ClassItem>
+            ))}
+          </ClassList>
+        </ClassesContent>
+      </Content>
     </ClassesContainer>
   );
 };
