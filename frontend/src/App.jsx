@@ -15,13 +15,11 @@ import Performance from '../src/pages/Admin/Performance';
 import Teachers from '../src/pages/Admin/Teachers';
 import Students from '../src/pages/Admin/Students';
 import Assignments from '../src/pages/Admin/Assignments';
-// <<<<<<< HEAD
-// import Library from '../src/pages/Admin/Library';
-// import EventCalender from '../src/pages/Admin/EventCalender';
-// import SettingsProfile from '../src/pages/Admin/SettingsProfile';
-// import Announcement from '../src/pages/Admin/Announcement';
-// =======
-// >>>>>>> e9465068d8fca90f674e4db47cb1bb666d72d16e
+import Library from '../src/pages/Admin/Library';
+import EventCalender from '../src/pages/Admin/EventCalender';
+import SettingsProfile from '../src/pages/Admin/SettingsProfile';
+import Announcement from '../src/pages/Admin/Announcement';
+
 
 const App = () => {
   return (
@@ -42,14 +40,10 @@ const App = () => {
         <Route exact path="/admin/teachers" element={<Teachers />} />
         <Route exact path="/admin/students" element={<Students />} />
         <Route exact path="/admin/assignments" element={<Assignments />} />
-{/* <<<<<<< HEAD
         <Route exact path="/admin/library" element={<Library />} />
         <Route exact path="/admin/communication" element={<Announcement />} />
         <Route exact path="/admin/events" element={<EventCalender />} />
         <Route exact path="/admin/settings" element={<SettingsProfile />} />
-=======
->>>>>>> e9465068d8fca90f674e4db47cb1bb666d72d16e */}
-
       </Routes>
     </Router>
   );
