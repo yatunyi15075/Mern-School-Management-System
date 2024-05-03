@@ -78,7 +78,7 @@ const StudentDashboard = () => {
 
         {/* Add more sections for other parts of the admin dashboard */}
       </Content>
-    </StudentDashboardContainer>
+    </StudentDashboardContainer> 
   );
 };
 

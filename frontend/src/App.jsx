@@ -8,6 +8,7 @@ import TeacherSignIn from '../src/components/TeacherSignIn';
 import AdminDashboard from '../src/pages/Admin/Dashboard';
 import StudentDashboard from '../src/pages/Students/Dashboard';
 import TeacherDashboard from '../src/pages/Teachers/Dashboard';
+
 import Classes from '../src/pages/Admin/Classes';
 import Exam from '../src/pages/Admin/Exam';
 import Attendance from '../src/pages/Admin/Attendance';
@@ -19,6 +20,9 @@ import Library from '../src/pages/Admin/Library';
 import EventCalender from '../src/pages/Admin/EventCalender';
 import SettingsProfile from '../src/pages/Admin/SettingsProfile';
 import Announcement from '../src/pages/Admin/Announcement';
+
+import StudentAssignments from '../src/pages/Students/Assignments';
+import ExamSection from '../src/pages/Students/Exams';
 
 
 const App = () => {
@@ -33,6 +37,7 @@ const App = () => {
         <Route exact path="/admin/dashboard" element={<AdminDashboard />} />
         <Route exact path="/teacher/dashboard" element={<TeacherDashboard />} />        
         <Route exact path="/student/dashboard" element={<StudentDashboard />} />
+
         <Route exact path="/admin/classes" element={<Classes />} />
         <Route exact path="/admin/exams" element={<Exam />} />
         <Route exact path="/admin/attendance" element={<Attendance />} />
@@ -44,6 +49,10 @@ const App = () => {
         <Route exact path="/admin/communication" element={<Announcement />} />
         <Route exact path="/admin/events" element={<EventCalender />} />
         <Route exact path="/admin/settings" element={<SettingsProfile />} />
+
+        <Route exact path="/student/assignments" element={<StudentAssignments />} />
+        <Route exact path="/student/exams" element={<ExamSection />} />
+
       </Routes>
     </Router>
   );
