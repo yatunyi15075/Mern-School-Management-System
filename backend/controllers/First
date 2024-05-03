@@ -1,0 +1,183 @@
+Student Schema: Define the schema for student data.
+Teacher Schema: Define the schema for teacher data.
+Student Router: Create routes for student-related operations.
+Teacher Router: Create routes for teacher-related operations.
+Student Controller: Implement the logic for student-related operations.
+Teacher Controller: Implement the logic for teacher-related operations.
+
+
+
+const mongoose = require('mongoose');
+
+const teacherSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  subject: {
+    type: String,
+    required: true
+  },
+  // Add more fields as needed
+});
+
+const Teacher = mongoose.model('Teacher', teacherSchema);
+
+module.exports = Teacher;
+
+
+
+
+const mongoose = require('mongoose');
+
+const studentSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  registrationNumber: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  class: {
+    type: String,
+    required: true
+  },
+  // Add more fields as needed
+});
+
+const Student = mongoose.model('Student', studentSchema);
+
+module.exports = Student;
+
+
+
+
+
+
+
+
+
+const express = require('express');
+const router = express.Router();
+const studentController = require('../controllers/studentController');
+
+// Define student routes
+router.get('/', studentController.getAllStudents);
+router.post('/', studentController.createStudent);
+// Add more routes as needed
+
+module.exports = router;
+
+
+
+
+
+const Student = require('../models/Student');
+
+const studentController = {
+  getAllStudents: async (req, res) => {
+    try {
+      const students = await Student.find();
+      res.json(students);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  },
+  createStudent: async (req, res) => {
+    const student = new Student({
+      name: req.body.name,
+      registrationNumber: req.body.registrationNumber,
+      class: req.body.class
+    });
+    try {
+      const newStudent = await student.save();
+      res.status(201).json(newStudent);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  },
+  // Implement more controller methods as needed
+};
+
+module.exports = studentController;
+
+
+
+
+
+
+const Teacher = require('../models/Teacher');
+
+const teacherController = {
+  getAllTeachers: async (req, res) => {
+    try {
+      const teachers = await Teacher.find();
+      res.json(teachers);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  },
+  createTeacher: async (req, res) => {
+    const teacher = new Teacher({
+      name: req.body.name,
+      email: req.body.email,
+      subject: req.body.subject
+    });
+    try {
+      const newTeacher = await teacher.save();
+      res.status(201).json(newTeacher);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  },
+  // Implement more controller methods as needed
+};
+
+module.exports = teacherController;
+
+
+
+
+
+
+
+
+const mongoose = require('mongoose');
+
+const assignmentSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  class: {
+    type: String,
+    required: true
+  },
+  deadline: {
+    type: Date,
+    required: true
+  },
+  done: {
+    type: Boolean,
+    default: false
+  },
+  // Add more fields as needed
+});
+
+const Assignment = mongoose.model('Assignment', assignmentSchema);
+
+module.exports = Assignment;
+
+
+
