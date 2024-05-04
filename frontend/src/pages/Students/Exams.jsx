@@ -90,7 +90,7 @@ const ExamSection = () => {
                     ticks: {
                       beginAtZero: true,
                       max: 100
-                    }
+                    } 
                   }]
                 }
               }}

@@ -41,7 +41,7 @@ const EditButton = styled.button`
   cursor: pointer;
 `;
 
-const ProfileSection = () => {
+const TeacherProfileSection = () => {
   const [teacherInfo, setTeacherInfo] = useState({
     name: 'John Doe',
     email: 'johndoe@example.com',
@@ -75,4 +75,4 @@ const ProfileSection = () => {
   );
 };
 
-export default ProfileSection;
+export default TeacherProfileSection;

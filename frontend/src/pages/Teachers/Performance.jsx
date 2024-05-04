@@ -34,7 +34,7 @@ const PerformanceGraph = styled.div`
   max-width: 800px;
 `;
 
-const PerformanceSection = () => {
+const CheckPerformanceSection = () => {
   // Dummy data for performance
   const [classPerformances, setClassPerformances] = useState([
     { className: 'Class A', averageScore: 75 },
@@ -93,4 +93,4 @@ const PerformanceSection = () => {
   );
 };
 
-export default PerformanceSection;
+export default CheckPerformanceSection;

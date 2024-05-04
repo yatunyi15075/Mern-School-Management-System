@@ -42,7 +42,7 @@ const AddAnnouncementButton = styled.button`
   cursor: pointer;
 `;
 
-const AnnouncementSection = () => {
+const CheckAnnouncementSection = () => {
   // Sample announcement data
   const [announcements, setAnnouncements] = useState([
     { id: 1, title: 'Important Announcement', message: 'This is an important announcement from the administration.' },
@@ -75,4 +75,4 @@ const AnnouncementSection = () => {
   );
 };
 
-export default AnnouncementSection;
+export default CheckAnnouncementSection;

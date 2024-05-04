@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Sidebar from './Sidebar';
-import { PieChart, Pie, Cell, Tooltip } from 'recharts';
+// import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 
 const AttendanceContainer = styled.div`
   display: flex;
@@ -45,7 +45,7 @@ const data = [
 
 const COLORS = ['#0088FE', '#FF8042'];
 
-const AttendanceSection = () => {
+const CheckAttendanceSection = () => {
   const [attendance, setAttendance] = useState([
     { id: 1, student: 'Student A', present: true },
     { id: 2, student: 'Student B', present: false },
@@ -102,4 +102,4 @@ const AttendanceSection = () => {
   );
 };
 
-export default AttendanceSection;
+export default CheckAttendanceSection;

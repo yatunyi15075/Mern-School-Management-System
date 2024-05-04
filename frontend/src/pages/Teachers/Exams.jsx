@@ -44,7 +44,7 @@ const AddButton = styled.button`
   cursor: pointer;
 `;
 
-const ExamSection = () => {
+const CheckExamSection = () => {
   const [examData, setExamData] = useState([]);
   const [name, setName] = useState('');
   const [registrationNumber, setRegistrationNumber] = useState('');
@@ -121,4 +121,4 @@ const ExamSection = () => {
   );
 };
 
-export default ExamSection;
+export default CheckExamSection;
