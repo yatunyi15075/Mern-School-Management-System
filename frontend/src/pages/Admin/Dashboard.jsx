@@ -9,6 +9,8 @@ const AdminDashboardContainer = styled.div`
 const Content = styled.div`
   flex: 1;
   padding: 20px;
+  margin-left: ${({ isOpen }) => (isOpen ? '250px' : '80px')}; /* Adjust margin based on sidebar state */
+  transition: margin-left 0.3s ease;
 `;
 
 const Section = styled.section`
@@ -18,6 +20,7 @@ const Section = styled.section`
 const SectionTitle = styled.h2`
   font-size: 24px;
   margin-bottom: 20px;
+  color: #333333; /* Darker text color */
 `;
 
 const CardContainer = styled.div`
@@ -31,11 +34,17 @@ const Card = styled.div`
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    transform: translateY(-5px); /* Add a slight lift effect on hover */
+  }
 `;
 
 const CardTitle = styled.h3`
   font-size: 18px;
   margin-bottom: 10px;
+  color: #007bff; /* Blue title color */
 `;
 
 const CardContent = styled.p`
@@ -44,6 +53,9 @@ const CardContent = styled.p`
 `;
 
 const AdminDashboard = () => {
+
+    const isOpen = true; // Pass the sidebar state here
+  
   return (
     <AdminDashboardContainer>
       <Sidebar />
@@ -81,5 +93,6 @@ const AdminDashboard = () => {
     </AdminDashboardContainer>
   );
 };
+
 
 export default AdminDashboard;

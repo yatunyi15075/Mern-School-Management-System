@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom'; 
 import { BsGraphUp, BsPeople, BsPerson, BsFileText, BsBook, BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCalendarEvent, BsQuestionSquare } from 'react-icons/bs';
 
 const SidebarContainer = styled.div`
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: ${({ isOpen }) => (isOpen ? '250px' : '80px')};
   width: 250px;
-  background-color: #252529;
+  height: 100%;
+  background-color: #2c3e50; /* Dark blue background */
   color: white;
+  overflow-y: auto; /* Enable vertical scrolling */
   padding-top: 60px;
+  transition: width 0.3s ease; /* Smooth width transition */
+  z-index: 100; /* Ensure sidebar stays above content */
 `;
 
 const SidebarHeader = styled.div`
@@ -16,7 +23,6 @@ const SidebarHeader = styled.div`
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  background-color: #1e1e23;
 `;
 
 const SidebarNav = styled.ul`
@@ -29,10 +35,10 @@ const SidebarNavItem = styled.li`
   align-items: center;
   padding: 12px 20px;
   font-size: 18px;
-  border-bottom: 1px solid #37373c;
+  border-bottom: 1px solid #34495e; /* Darker border */
   transition: background-color 0.3s ease;
   &:hover {
-    background-color: #37373c;
+    background-color: #34495e; /* Darker background on hover */
   }
 `;
 
@@ -53,11 +59,11 @@ const Logo = styled.img`
 
 const ToggleButton = styled.div`
   position: absolute;
-  top: 20px; /* Adjust the top position as needed */
-  right: 0; /* Position it at the right edge of the sidebar */
+  top: 20px;
+  right: 0;
   width: 30px;
   height: 30px;
-  background-color: #1e1e23;
+  background-color: #34495e; /* Darker background */
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -78,18 +84,17 @@ const Sidebar = () => {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
-  
+   
   return (
-    <SidebarContainer>
-      <SidebarHeader>
-        <Logo src="../assets/bg1.png" alt="Logo" />
-      </SidebarHeader>
-      <SidebarHeader>Admin</SidebarHeader>
-      <SidebarNav>
-        <SidebarNavItem>
-          <SidebarIcon><BsGraphUp /></SidebarIcon>
-          <StyledLink to="/admin/dashboard">Dashboard</StyledLink>
-        </SidebarNavItem>
+    <SidebarContainer style={{ width: isOpen ? '250px' : '80px' }}>
+    <SidebarHeader>
+      <Logo src="../assets/bg1.png" alt="Logo" />
+    </SidebarHeader>
+    <SidebarNav>
+      <SidebarNavItem>
+        <SidebarIcon><BsGraphUp /></SidebarIcon>
+        <StyledLink to="/admin/dashboard">Dashboard</StyledLink>
+      </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsPeople /></SidebarIcon>
           <StyledLink to="/admin/classes">Classes</StyledLink>
@@ -134,7 +139,7 @@ const Sidebar = () => {
           <SidebarIcon><BsGear /></SidebarIcon>
           <StyledLink to="/admin/settings">Settings & Profile</StyledLink>
         </SidebarNavItem>
-      </SidebarNav>
+        </SidebarNav>
       <ToggleButton onClick={toggleSidebar}>
         <ToggleIcon isOpen={isOpen}>▲</ToggleIcon>
       </ToggleButton>

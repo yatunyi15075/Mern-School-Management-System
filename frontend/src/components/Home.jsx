@@ -9,12 +9,18 @@ import { useNavigate } from 'react-router-dom';
 const lorem = new LoremIpsum();
 
 const Navbar = styled.nav`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  background-color: #f3f3f3;
+  background-color: #6BD4E7; /* Eye-catching teal background color */
   color: black;
+  font-family: Arial, sans-serif;
+  z-index: 1000; /* Ensure the navbar stays above other content */
 `;
 
 const Logo = styled.img`
@@ -31,6 +37,8 @@ const NavLink = styled.a`
   margin-right: 20px;
   color: black;
   text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
   &:hover {
     text-decoration: underline;
   }
@@ -39,6 +47,7 @@ const NavLink = styled.a`
 const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-right: 35px; /* Add margin to separate buttons from the edge */
 `;
 
 const LoginButton = styled.button`
@@ -48,6 +57,8 @@ const LoginButton = styled.button`
   padding: 10px 20px;
   margin-right: 10px;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
 `;
 
 const GuestButton = styled.button`
@@ -56,6 +67,15 @@ const GuestButton = styled.button`
   background-color: transparent;
   padding: 10px 20px;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border: 2px solid orange;
+  border-radius: 5px;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: orange;
+  }
 `;
 
 const HomeContainer = styled.div`
@@ -63,10 +83,11 @@ const HomeContainer = styled.div`
   flex-direction: column; 
   align-items: center;
   text-align: center;
-  background-color: #6FC3DF;
+  background: linear-gradient(45deg, #6BD4E7, #6FC3DF); /* Gradient background */
   background-size: cover;
   background-position: center;
-  min-height: 100vh; /* Set minimum height to cover entire viewport */
+  min-height: 100vh;
+  padding-top: 80px; /* Add padding-top to push content below the fixed navbar */
 `;
 
 const SchoolInfo = styled.div`
@@ -74,34 +95,33 @@ const SchoolInfo = styled.div`
 `;
 
 const SchoolImage = styled.img`
-  width: 80%; /* Increase image size */
-  max-height: 80vh; /* Max height to maintain aspect ratio */
-  object-fit: cover; /* Cover entire container */
+  width: 80%;
+  max-height: 80vh;
+  object-fit: cover;
   margin-top: 20px;
 `;
 
 const Title = styled.h1`
-  font-size: 36px; /* Increased font size */
+  font-size: 36px;
   font-weight: bold;
-  color: white; /* Text color */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better visibility */
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 `;
 
 const LoremTextContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
-  font-size: 18px; /* Increased font size */
-  color: white; /* Text color */
-  text-align: justify; /* Justify text */
-  padding: 0 20px; /* Add some padding for better readability */
+  font-size: 18px;
+  color: white;
+  text-align: justify;
+  padding: 0 20px;
 `;
 
 const Home = () => {
-  const navigate = useNavigate(); // Access the navigate function using useNavigate hook
+  const navigate = useNavigate();
   const loremText = lorem.generateParagraphs(1);
 
   const handleLoginClick = () => {
-    // Navigate to the "/choose-user" route when Login button is clicked
     navigate('/choose-user');
   };
 
@@ -115,7 +135,7 @@ const Home = () => {
           <NavLink href="#">Contact Us</NavLink>
         </NavigationLinks>
         <ButtonsContainer>
-          <LoginButton onClick={handleLoginClick}>Login</LoginButton>
+          <LoginButton onClick={handleLoginClick}>Sign In</LoginButton>
           <GuestButton onClick={handleLoginClick}>Guest Mode</GuestButton>
         </ButtonsContainer>
       </Navbar>
