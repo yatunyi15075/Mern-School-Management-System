@@ -1,28 +1,25 @@
-const Student = require('../models/Student');
+import { Student } from "../models/studentSchema.js";
 
-const studentController = {
-  getAllStudents: async (req, res) => {
-    try {
-      const students = await Student.find();
-      res.json(students);
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  },
-  createStudent: async (req, res) => {
-    const student = new Student({
-      name: req.body.name,
-      registrationNumber: req.body.registrationNumber,
-      class: req.body.class
-    });
-    try {
-      const newStudent = await student.save();
-      res.status(201).json(newStudent);
-    } catch (err) {
-      res.status(400).json({ message: err.message });
-    }
-  },
-  // Implement more controller methods as needed
+export const createStudent = async (req, res, next) => {
+  console.log(req.body);
+  const { name, registrationNumber, grade } = req.body;
+  if (!name || !registrationNumber || !grade ) {
+    return next("Please Fill Full Form!", 400);
+  }
+  await Student.create({ name, registrationNumber, grade });
+  res.status(200).json({
+    success: true,
+    message: "Student Created!",
+  });
 };
 
-module.exports = studentController;
+export const getAllStudents = async (req, res, next) => {
+  const students = await Student.find();
+  res.status(200).json({
+    success: true,
+    students,
+  });
+};
+
+
+

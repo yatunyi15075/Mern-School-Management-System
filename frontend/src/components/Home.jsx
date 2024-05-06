@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { LoremIpsum } from 'lorem-ipsum';
 import bg from "../assets/bg.png";
 import bg1 from "../assets/bg1.png";
-import hero from "../assets/hero.jpg"; // Import the hero background image
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import hero from "../assets/hero.jpg";
+import { useNavigate } from 'react-router-dom'; 
 
 const lorem = new LoremIpsum();
 
@@ -60,11 +60,13 @@ const GuestButton = styled.button`
 
 const HomeContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   align-items: center;
   text-align: center;
-  background-image: url(${hero});
-  background-size: cover; 
+  background-color: #6FC3DF;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh; /* Set minimum height to cover entire viewport */
 `;
 
 const SchoolInfo = styled.div`
@@ -72,19 +74,26 @@ const SchoolInfo = styled.div`
 `;
 
 const SchoolImage = styled.img`
-  max-width: 100%;
-  height: auto;
+  width: 80%; /* Increase image size */
+  max-height: 80vh; /* Max height to maintain aspect ratio */
+  object-fit: cover; /* Cover entire container */
   margin-top: 20px;
 `;
 
 const Title = styled.h1`
-  font-size: 24px;
+  font-size: 36px; /* Increased font size */
   font-weight: bold;
+  color: white; /* Text color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better visibility */
 `;
 
 const LoremTextContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
+  font-size: 18px; /* Increased font size */
+  color: white; /* Text color */
+  text-align: justify; /* Justify text */
+  padding: 0 20px; /* Add some padding for better readability */
 `;
 
 const Home = () => {

@@ -1,10 +1,10 @@
-const express = require('express');
+import express from "express";
+import { createAssignment, getAllAssignments } from "../controllers/assignmentController.js";
+
+
 const router = express.Router();
-const assignmentController = require('../controllers/assignmentController');
 
-// Define assignment routes
-router.get('/getall', assignmentController.getAllAssignments);
-router.post('/assignments', assignmentController.createAssignment);
-// Add more routes as needed
+router.post("/send", createAssignment);
+router.get("/getall", getAllAssignments);
 
-module.exports = router;
+export default router;

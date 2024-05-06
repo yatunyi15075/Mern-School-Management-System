@@ -1,28 +1,23 @@
-const Teacher = require('../models/Teacher');
+import { Teacher } from "../models/teacherSchema.js";
 
-const teacherController = {
-  getAllTeachers: async (req, res) => {
-    try {
-      const teachers = await Teacher.find();
-      res.json(teachers);
-    } catch (err) {
-      res.status(500).json({ message: err.message });
+ export const createTeacher = async (req, res, next) => {
+    const { name, email, subject } = req.body;
+    if (!name || !email || !subject ) {
+      return next("Please Fill Full Form!", 400);
     }
-  },
-  createTeacher: async (req, res) => {
-    const teacher = new Teacher({
-      name: req.body.name,
-      email: req.body.email,
-      subject: req.body.subject
+    await Teacher.create({ name, email, subject });
+    res.status(200).json({
+      success: true,
+      message: "Teacher Created!",
     });
-    try {
-      const newTeacher = await teacher.save();
-      res.status(201).json(newTeacher);
-    } catch (err) {
-      res.status(400).json({ message: err.message });
-    }
-  },
-  // Implement more controller methods as needed
-};
+  };
+  
 
-module.exports = teacherController;
+  export const getAllTeachers = async (req, res, next) => {
+    const teachers = await Teacher.find();
+    res.status(200).json({
+      success: true,
+      teachers,
+    });
+  };
+  
