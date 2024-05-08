@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Sidebar from './Sidebar'; // Import the Sidebar component
+import axios from 'axios';
 
 const AssignmentsContainer = styled.div`
   display: flex;
@@ -43,6 +44,13 @@ const AddAssignmentInput = styled.input`
   border-radius: 4px;
 `;
 
+const AddAssignmentTextArea = styled.textarea`
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
 const AddAssignmentButton = styled.button`
   padding: 8px 16px;
   background-color: #007bff;
@@ -53,24 +61,32 @@ const AddAssignmentButton = styled.button`
 `;
 
 const Assignments = () => {
-  const [newAssignment, setNewAssignment] = useState('');
-  const [assignments, setAssignments] = useState([
-    { id: 1, className: 'Class A', assignment: 'Assignment 1' },
-    { id: 2, className: 'Class B', assignment: 'Assignment 2' },
-    { id: 3, className: 'Class C', assignment: 'Assignment 3' },
-  ]);
+  const [newAssignment, setNewAssignment] = useState({ title: '', description: '', grade: '', deadline: '' });
+  const [assignments, setAssignments] = useState([]);
 
-  const handleAddAssignment = (e) => {
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
+
+  const fetchAssignments = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/v1/assignments/getall');
+      setAssignments(response.data.assignments);
+    } catch (error) {
+      console.error('Error fetching assignments:', error);
+    }
+  };
+
+  const handleAddAssignment = async (e) => {
     e.preventDefault();
-    if (newAssignment.trim() !== '') {
-      // For demonstration purposes, let's assume the assignment is added to all classes
-      const newAssignments = classes.map((classItem) => ({
-        id: Math.floor(Math.random() * 1000), // Generate a random ID for the assignment
-        className: classItem,
-        assignment: newAssignment,
-      }));
-      setAssignments([...assignments, ...newAssignments]);
-      setNewAssignment('');
+    if (newAssignment.title.trim() !== '' && newAssignment.description.trim() !== '' && newAssignment.grade.trim() !== '' && newAssignment.deadline.trim() !== '') {
+      try {
+        const response = await axios.post('http://localhost:4000/api/v1/assignments', newAssignment);
+        setAssignments([...assignments, response.data.assignment]);
+        setNewAssignment({ title: '', description: '', grade: '', deadline: '' });
+      } catch (error) {
+        console.error('Error adding assignment:', error);
+      }
     }
   };
 
@@ -83,17 +99,34 @@ const Assignments = () => {
           <AddAssignmentForm onSubmit={handleAddAssignment}>
             <AddAssignmentInput
               type="text"
-              placeholder="Enter assignment"
-              value={newAssignment}
-              onChange={(e) => setNewAssignment(e.target.value)}
+              placeholder="Enter assignment title"
+              value={newAssignment.title}
+              onChange={(e) => setNewAssignment({ ...newAssignment, title: e.target.value })}
+            />
+            <AddAssignmentTextArea
+              placeholder="Enter assignment description"
+              value={newAssignment.description}
+              onChange={(e) => setNewAssignment({ ...newAssignment, description: e.target.value })}
+            />
+            <AddAssignmentInput
+              type="text"
+              placeholder="Enter assignment grade"
+              value={newAssignment.grade}
+              onChange={(e) => setNewAssignment({ ...newAssignment, grade: e.target.value })}
+            />
+            <AddAssignmentInput
+              type="text"
+              placeholder="Enter assignment deadline"
+              value={newAssignment.deadline}
+              onChange={(e) => setNewAssignment({ ...newAssignment, deadline: e.target.value })}
             />
             <AddAssignmentButton type="submit">Add Assignment</AddAssignmentButton>
           </AddAssignmentForm>
           <AssignmentList>
             {assignments.map((assignment) => (
               <AssignmentItem key={assignment.id}>
-                <strong>{assignment.className}: </strong>
-                {assignment.assignment}
+                <strong>{assignment.title}: </strong>
+                {assignment.description}, {assignment.grade}, {assignment.deadline}
               </AssignmentItem>
             ))}
           </AssignmentList>
