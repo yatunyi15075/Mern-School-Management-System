@@ -4,7 +4,7 @@ import { createTeacher, getAllTeachers } from "../controllers/teacherController.
 
 const router = express.Router();
 
-router.post('/create', createTeacher);
+router.post('/', createTeacher);
 router.get('/getall', getAllTeachers);
 
 
