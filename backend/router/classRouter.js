@@ -4,7 +4,7 @@ import { getAllClasses, createClass } from "../controllers/classConroller.js";
 const router = express.Router();
 
 router.get('/getall', getAllClasses);
-router.post('/classes', createClass);
+router.post('/', createClass);
 
 
 export default router;
