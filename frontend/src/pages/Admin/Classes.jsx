@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Sidebar from './Sidebar'; // Import the Sidebar component
+import axios from 'axios';
 
 const ClassesContainer = styled.div`
   display: flex;
@@ -54,15 +55,34 @@ const AddClassButton = styled.button`
 
 const Classes = () => {
   const [newClassName, setNewClassName] = useState('');
-  const [classes, setClasses] = useState(['Class A', 'Class B', 'Class C']);
+  const [classes, setClasses] = useState([]);
 
-  const handleAddClass = (e) => {
-    e.preventDefault();
-    if (newClassName.trim() !== '') {
-      setClasses([...classes, newClassName]);
-      setNewClassName('');
+  useEffect(() => {
+    fetchClasses();
+  }, []);
+
+  const fetchClasses = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/v1/class/getall');
+      setClasses(response.data);
+    } catch (error) {
+      console.error('Error fetching classes:', error);
     }
   };
+
+  const handleAddClass = async (e) => {
+    e.preventDefault();
+    if (newClassName.trim() !== '') {
+      try {
+        const response = await axios.post('http://localhost:4000/api/v1/class', { grade: newClassName });
+        setClasses([...classes, response.data]); // Assuming response.data contains the new class
+        setNewClassName('');
+      } catch (error) {
+        console.error('Error adding class:', error);
+      }
+    }
+  };
+  
 
   return (
     <ClassesContainer>
@@ -80,8 +100,9 @@ const Classes = () => {
             <AddClassButton type="submit">Add Class</AddClassButton>
           </AddClassForm>
           <ClassList>
-            {classes.map((className, index) => (
-              <ClassItem key={index}>{className}</ClassItem>
+            {/* Ensure that classes is an array before mapping over it */}
+            {Array.isArray(classes) && classes.map((classItem, index) => (
+              <ClassItem key={index}>{classItem.name}</ClassItem>
             ))}
           </ClassList>
         </ClassesContent>
