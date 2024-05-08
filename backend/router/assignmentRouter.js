@@ -4,7 +4,7 @@ import { createAssignment, getAllAssignments } from "../controllers/assignmentCo
 
 const router = express.Router();
 
-router.post("/send", createAssignment);
+router.post("/", createAssignment);
 router.get("/getall", getAllAssignments);
 
 export default router;
