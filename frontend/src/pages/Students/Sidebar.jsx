@@ -1,31 +1,28 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { BsGraphUp, 
-  BsPeople, 
-  BsPerson, 
-  BsFileText, 
-  BsBook, 
-  BsGraphDown, 
-  BsCalendar, 
-  BsGear, 
-  BsChatDots, 
- } from 'react-icons/bs';
-
+import { Link } from 'react-router-dom'; 
+import { BsGraphUp, BsPeople, BsPerson, BsFileText, BsBook, BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCalendarEvent, BsQuestionSquare } from 'react-icons/bs';
 
 const SidebarContainer = styled.div`
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: ${({ isOpen }) => (isOpen ? '250px' : '80px')};
   width: 250px;
-  background-color: #252529;
+  height: 100%;
+  background-color: #2c3e50; /* Dark blue background */
   color: white;
+  overflow-y: auto; /* Enable vertical scrolling */
   padding-top: 60px;
+  transition: width 0.3s ease; /* Smooth width transition */
+  z-index: 100; /* Ensure sidebar stays above content */
 `;
+
 const SidebarHeader = styled.div`
   padding: 20px;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  background-color: #1e1e23;
 `;
 
 const SidebarNav = styled.ul`
@@ -38,10 +35,10 @@ const SidebarNavItem = styled.li`
   align-items: center;
   padding: 12px 20px;
   font-size: 18px;
-  border-bottom: 1px solid #37373c;
+  border-bottom: 1px solid #34495e; /* Darker border */
   transition: background-color 0.3s ease;
   &:hover {
-    background-color: #37373c;
+    background-color: #34495e; /* Darker background on hover */
   }
 `;
 
@@ -62,17 +59,18 @@ const Logo = styled.img`
 
 const ToggleButton = styled.div`
   position: absolute;
-  top: 20px; 
-  right: 0; 
+  top: 20px;
+  right: 0;
   width: 30px;
   height: 30px;
-  background-color: #1e1e23;
+  background-color: #34495e; /* Darker background */
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
+
 const ToggleIcon = styled.span`
   color: white;
   font-size: 20px;
@@ -84,12 +82,10 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   const toggleSidebar = () => {
-    console.log('Toggle Sidebar');
     setIsOpen(!isOpen);
-  };
-  
+  }; 
   return (
-    <SidebarContainer>
+    <SidebarContainer style={{ width: isOpen ? '250px' : '80px' }}>
         <SidebarHeader>
         <Logo src={"../assets/bg1.png"} alt="Logo" />
       </SidebarHeader>
