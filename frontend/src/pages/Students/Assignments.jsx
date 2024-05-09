@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Sidebar from './Sidebar';
+import axios from 'axios';
 
 const AssignmentsContainer = styled.div`
   display: flex;
 `;
 
 const SidebarContainer = styled.div`
-  flex: 0 0 250px; /* Sidebar width */
+  flex: 0 0 250px;
 `;
 
 const Content = styled.div`
@@ -53,16 +54,23 @@ const AssignmentDoneMessage = styled.p`
 `;
 
 const StudentAssignments = () => {
-  const [assignments, setAssignments] = useState([
-    { id: 1, title: 'Assignment 1', description: 'Write a short essay on a topic of your choice.', done: false },
-    { id: 2, title: 'Assignment 2', description: 'Solve the math problems attached.', done: false },
-  ]);
+  const [assignments, setAssignments] = useState([]);
+
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
+
+  const fetchAssignments = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/v1/assignments/getall');
+      setAssignments(response.data.assignments);
+    } catch (error) {
+      console.error('Error fetching assignments:', error);
+    }
+  };
 
   const handleDoAssignment = (id) => {
-    const updatedAssignments = assignments.map((assignment) =>
-      assignment.id === id ? { ...assignment, done: true } : assignment
-    );
-    setAssignments(updatedAssignments);
+    // Implement your logic for handling assignment submission
   };
 
   return (
