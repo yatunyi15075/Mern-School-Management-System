@@ -9,6 +9,7 @@ import assignmentRouter from "./router/assignmentRouter.js";
 import announcementRouter from "./router/announcementRouter.js";
 import classRouter from "./router/classRouter.js";
 import libraryRouter from "./router/libraryRouter.js";
+import eventsRouter from "./router/eventsRouter.js";
 
 const app = express();
 config({path: "./config/config.env"});
@@ -31,6 +32,7 @@ app.use("/api/v1/assignments", assignmentRouter);
 app.use("/api/v1/announcements", announcementRouter);
 app.use("/api/v1/class", classRouter);
 app.use("/api/v1/library", libraryRouter);
+app.use("/api/v1/events", eventsRouter);
 
 dbConnection()
 
