@@ -100,7 +100,7 @@ const Classes = () => {
 
   return (
     <ClassesContainer>
-      <Sidebar /> {/* Include the Sidebar component */}
+      <Sidebar /> 
       <Content>
         <ClassesContent>
           <ClassesHeader>Classes</ClassesHeader>
@@ -114,11 +114,12 @@ const Classes = () => {
             <AddClassButton type="submit">Add Class</AddClassButton>
           </AddClassForm>
           <ClassList>
-            {/* Ensure that classes is an array before mapping over it */}
-            {Array.isArray(classes) && classes.map((classItem, index) => (
-              <ClassItem key={index}>{classItem.name}</ClassItem>
-            ))}
-          </ClassList>
+  {/* Ensure that classes is an array before mapping over it */}
+  {Array.isArray(classes) && classes.map((classItem, index) => (
+    <ClassItem key={index}>{classItem.grade}</ClassItem> 
+  ))}
+</ClassList>
+
         </ClassesContent>
       </Content>
     </ClassesContainer>
