@@ -4,7 +4,7 @@ import { LoremIpsum } from 'lorem-ipsum';
 import bg from "../assets/bg.png";
 import bg1 from "../assets/bg1.png";
 import hero from "../assets/hero.jpg";
-import { useNavigate } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom'; 
 
 const lorem = new LoremIpsum();
 
@@ -117,6 +117,17 @@ const LoremTextContainer = styled.div`
   padding: 0 20px;
 `;
 
+const AdminRegisterLink = styled(Link)`
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 10px;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 const Home = () => {
   const navigate = useNavigate();
   const loremText = lorem.generateParagraphs(1);
@@ -145,6 +156,7 @@ const Home = () => {
           <LoremTextContainer>
             <p>{loremText}</p>
           </LoremTextContainer>
+          <AdminRegisterLink to="/admin/register">Admin Register</AdminRegisterLink>
         </SchoolInfo>
         <SchoolImage src={bg} alt="pupils" />
       </HomeContainer>
