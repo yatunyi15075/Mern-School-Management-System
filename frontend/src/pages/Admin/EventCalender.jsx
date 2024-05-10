@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const EventCalendarContainer = styled.div`
   display: flex;
+  padding-left: 240px;
 `;
 
 const Content = styled.div`
