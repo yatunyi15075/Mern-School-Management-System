@@ -5,6 +5,7 @@ import { BsPlus } from 'react-icons/bs';
 
 const EventContainer = styled.div`
   display: flex;
+  padding-left: 240px;
 `;
 
 const SidebarContainer = styled.div`
