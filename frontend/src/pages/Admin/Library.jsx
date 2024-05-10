@@ -13,6 +13,73 @@ const Content = styled.div`
   padding: 20px;
 `;
 
+const Title = styled.h1`
+  margin-bottom: 20px;
+`;
+
+const AddBookForm = styled.form`
+  margin-bottom: 20px;
+`;
+
+const FormGroup = styled.div`
+  margin-bottom: 10px;
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 5px;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+const Button = styled.button`
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+`;
+
+const BookList = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+const BookItem = styled.li`
+  margin-bottom: 10px;
+`;
+
+const BookTitle = styled.span`
+  font-weight: bold;
+`;
+
+const BookAuthor = styled.span`
+  margin-left: 10px;
+`;
+
+const ActionButton = styled.button`
+  margin-left: 10px;
+  padding: 4px 8px;
+  font-size: 14px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #218838;
+  }
+`;
+
 const Library = () => {
   const [books, setBooks] = useState([]);
 
@@ -23,8 +90,7 @@ const Library = () => {
   const fetchBooks = async () => {
     try {
       const response = await axios.get('http://localhost:4000/api/v1/library/getall');
-      console.log('Response data:', response.data); // Log the response data
-      setBooks(response.data.books); // Update to access books array from response.data
+      setBooks(response.data.books);
     } catch (error) {
       console.error('Error fetching books:', error);
     }
@@ -41,7 +107,7 @@ const Library = () => {
       console.error('Error adding book:', error);
     }
   };
-  
+
   const handleBookPick = async (bookId, studentId) => {
     // Implement logic to record when a student picks a book
   };
@@ -54,8 +120,8 @@ const Library = () => {
     <LibraryContainer>
       <Sidebar />
       <Content>
-        <h1>Library Management</h1>
-        <form
+        <Title>Library Management</Title>
+        <AddBookForm
           onSubmit={(e) => {
             e.preventDefault();
             const book = {
@@ -68,23 +134,28 @@ const Library = () => {
           }}
         >
           <h2>Add New Book</h2>
-          <label htmlFor="title">Title:</label>
-          <input type="text" id="title" required />
-          <label htmlFor="author">Author:</label>
-          <input type="text" id="author" required />
-          <button type="submit">Add Book</button>
-        </form>
+          <FormGroup>
+            <Label htmlFor="title">Title:</Label>
+            <Input type="text" id="title" required />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="author">Author:</Label>
+            <Input type="text" id="author" required />
+          </FormGroup>
+          <Button type="submit">Add Book</Button>
+        </AddBookForm>
 
         <h2>Books</h2>
-        <ul>
+        <BookList>
           {books.map((book) => (
-            <li key={book._id}> {/* Update key to use _id */}
-              {book.bookname} by {book.author} {/* Update property names */}
-              <button onClick={() => handleBookPick(book._id, 'student123')}>Pick</button>
-              <button onClick={() => handleBookReturn(book._id, 'student123')}>Return</button>
-            </li>
+            <BookItem key={book._id}>
+              <BookTitle>{book.bookname}</BookTitle>
+              <BookAuthor>by {book.author}</BookAuthor>
+              <ActionButton onClick={() => handleBookPick(book._id, 'student123')}>Pick</ActionButton>
+              <ActionButton onClick={() => handleBookReturn(book._id, 'student123')}>Return</ActionButton>
+            </BookItem>
           ))}
-        </ul>
+        </BookList>
       </Content>
     </LibraryContainer>
   );
