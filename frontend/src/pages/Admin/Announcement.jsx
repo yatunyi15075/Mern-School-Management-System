@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Sidebar from './Sidebar';
+import axios from 'axios';
 
 const AnnouncementContainer = styled.div`
   display: flex;
@@ -12,61 +13,121 @@ const Content = styled.div`
   padding: 20px;
 `;
 
+const Title = styled.h1`
+  margin-bottom: 20px;
+`;
+
+const AnnouncementForm = styled.form`
+  margin-bottom: 20px;
+`;
+
+const FormGroup = styled.div`
+  margin-bottom: 10px;
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 5px;
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+const Button = styled.button`
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+`;
+
+const AnnouncementList = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+const AnnouncementItem = styled.li`
+  margin-bottom: 10px;
+`;
+
+const AnnouncementContent = styled.p`
+  font-size: 16px;
+`;
+
 const Announcement = () => {
   // State for managing announcement
   const [announcement, setAnnouncement] = useState('');
-  const [sendToTeachers, setSendToTeachers] = useState(false);
-  const [sendToStudents, setSendToStudents] = useState(false);
+  const [announcements, setAnnouncements] = useState([]);
+  const [error, setError] = useState(null);
 
-  // Function to handle form submission
-  const handleSubmit = (e) => {
+  // Function to fetch announcements
+  const fetchAnnouncements = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/v1/announcements/getall');
+      setAnnouncements(response.data.announcements);
+    } catch (error) {
+      console.error('Error fetching announcements:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAnnouncements();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Implement logic to send announcement based on selections
-    console.log('Announcement:', announcement);
-    console.log('Send to Teachers:', sendToTeachers);
-    console.log('Send to Students:', sendToStudents);
-    // Clear the form
-    setAnnouncement('');
-    setSendToTeachers(false);
-    setSendToStudents(false);
+    try {
+      const response = await axios.post('http://localhost:4000/api/v1/announcements', {
+        announcement: announcement, // Ensure that the key matches the backend model
+      });
+      console.log('Announcement sent:', response.data);
+      // Clear the form
+      setAnnouncement('');
+      // Fetch announcements again to update the list
+      fetchAnnouncements();
+    } catch (error) {
+      console.error('Error sending announcement:', error);
+      setError('Error sending announcement');
+    }
   };
 
   return (
     <AnnouncementContainer>
       <Sidebar />
       <Content>
-        <h1>Announcement</h1>
+        <Title>Announcement</Title>
         {/* Announcement Form */}
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="announcement">Announcement:</label>
-          <textarea
-            id="announcement"
-            value={announcement}
-            onChange={(e) => setAnnouncement(e.target.value)}
-            required
-            rows={4}
-            cols={50}
-          />
-          <div>
-            <input
-              type="checkbox"
-              id="teachers"
-              checked={sendToTeachers}
-              onChange={(e) => setSendToTeachers(e.target.checked)}
+        <AnnouncementForm onSubmit={handleSubmit}>
+          <FormGroup>
+            <Label htmlFor="announcement">Announcement:</Label>
+            <TextArea
+              id="announcement"
+              value={announcement}
+              onChange={(e) => setAnnouncement(e.target.value)}
+              required
+              rows={4}
+              cols={50}
             />
-            <label htmlFor="teachers">Send to Teachers</label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="students"
-              checked={sendToStudents}
-              onChange={(e) => setSendToStudents(e.target.checked)}
-            />
-            <label htmlFor="students">Send to Students</label>
-          </div>
-          <button type="submit">Send Announcement</button>
-        </form>
+          </FormGroup>
+          <Button type="submit">Send Announcement</Button>
+        </AnnouncementForm>
+
+        {/* Display Announcements */}
+        <h2>Announcements</h2>
+        <AnnouncementList>
+          {announcements.map((announcement) => (
+            <AnnouncementItem key={announcement._id}>
+              <AnnouncementContent>{announcement.announcement}</AnnouncementContent>
+            </AnnouncementItem>
+          ))}
+        </AnnouncementList>
       </Content>
     </AnnouncementContainer>
   );
