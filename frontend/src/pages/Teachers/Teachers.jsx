@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 
 const TeacherContainer = styled.div`
   display: flex;
+  padding-left: 240px;
 `;
 
 const SidebarContainer = styled.div`
