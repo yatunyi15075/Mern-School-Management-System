@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Sidebar from './Sidebar'; // Import the Sidebar component
-import axios from 'axios'; // Import Axios for HTTP requests
+import Sidebar from './Sidebar';
+import axios from 'axios';
 
 const AttendanceContainer = styled.div`
   display: flex;
@@ -82,10 +82,10 @@ const Attendance = () => {
     setAttendanceData(initialAttendanceData);
   };
 
-  const handleStatusChange = (id, event) => {
+  const handleStatusChange = (id, status) => {
     const updatedData = attendanceData.map((student) => {
       if (student.id === id) {
-        return { ...student, status: event.target.checked ? 'Present' : 'Absent' };
+        return { ...student, status };
       }
       return student;
     });
@@ -95,7 +95,7 @@ const Attendance = () => {
   const handleSubmit = async () => {
     try {
       // Send attendance data to the database
-      const response = await axios.post('http://localhost:4000/api/v1/attendance', attendanceData);
+      const response = await axios.post('http://localhost:4000/api/v1/attendance', { attendanceData });
       console.log('Attendance data submitted:', response.data);
     } catch (error) {
       console.error('Error submitting attendance data:', error);
@@ -104,36 +104,36 @@ const Attendance = () => {
 
   return (
     <AttendanceContainer>
-      <Sidebar /> {/* Include the Sidebar component */}
+      <Sidebar />
       <Content>
         <AttendanceContent>
           <AttendanceHeader>Attendance</AttendanceHeader>
           <AttendanceList>
-            {attendanceData.map((student, index) => (
+            {students.map((student, index) => (
               <React.Fragment key={student.id}>
                 <AttendanceItem>
                   <StudentName>{student.name}</StudentName>
                   <CheckboxLabel>
                     <input
                       type="checkbox"
-                      checked={student.status === 'Present'}
-                      onChange={(event) => handleStatusChange(student.id, event)}
+                      checked={attendanceData[index]?.status === 'Present'}
+                      onChange={() => handleStatusChange(student.id, 'Present')}
                     />
                     Present
                   </CheckboxLabel>
                   <CheckboxLabel>
                     <input
                       type="checkbox"
-                      checked={student.status === 'Absent'}
-                      onChange={(event) => handleStatusChange(student.id, event)}
+                      checked={attendanceData[index]?.status === 'Absent'}
+                      onChange={() => handleStatusChange(student.id, 'Absent')}
                     />
                     Absent
                   </CheckboxLabel>
                   <CheckboxLabel>
                     <input
                       type="checkbox"
-                      checked={student.status === 'Absent with apology'}
-                      onChange={(event) => handleStatusChange(student.id, event)}
+                      checked={attendanceData[index]?.status === 'Absent with apology'}
+                      onChange={() => handleStatusChange(student.id, 'Absent with apology')}
                     />
                     Absent with apology
                   </CheckboxLabel>
