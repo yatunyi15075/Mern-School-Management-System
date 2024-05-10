@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const StudentsContainer = styled.div`
   display: flex;
+  padding-left: 240px;
 `;
 
 const Content = styled.div`
