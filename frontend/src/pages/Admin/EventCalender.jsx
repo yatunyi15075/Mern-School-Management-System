@@ -26,6 +26,37 @@ const Events = styled.div`
 
 const Event = styled.div`
   margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+`;
+
+const AddEventForm = styled.form`
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+`;
+
+const EventInput = styled.input`
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+`;
+
+const AddEventButton = styled.button`
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+`;
+
+const ErrorText = styled.p`
+  color: red;
+  margin-top: 10px;
 `;
 
 const EventCalendar = () => {
@@ -37,7 +68,7 @@ const EventCalendar = () => {
   const fetchEvents = async () => {
     try {
       const response = await axios.get('http://localhost:4000/api/v1/events/getall');
-      setEvents(response.data.events || []); // Ensure events array is initialized even if response.data.events is undefined
+      setEvents(response.data.events || []);
     } catch (error) {
       console.error('Error fetching events:', error);
       setError('Error fetching events');
@@ -49,7 +80,8 @@ const EventCalendar = () => {
   }, []);
 
   // Function to add a new event
-  const addEvent = async () => {
+  const addEvent = async (e) => {
+    e.preventDefault();
     try {
       const response = await axios.post('http://localhost:4000/api/v1/events', {
         event: newEvent,
@@ -58,7 +90,11 @@ const EventCalendar = () => {
       setNewEvent('');
     } catch (error) {
       console.error('Error adding event:', error);
-      setError('Error adding event');
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error);
+      } else {
+        setError('Error adding event');
+      }
     }
   };
 
@@ -67,27 +103,23 @@ const EventCalendar = () => {
       <Sidebar />
       <Content>
         <h1>Events & Calendar</h1>
-        {/* Current Time Display */}
         <div>Current Time: {new Date().toLocaleString()}</div>
-        {/* Calendar */}
         <CalendarContainer>
           {/* Display Calendar Here */}
           {/* For example: <Calendar /> */}
           Calendar
         </CalendarContainer>
-        {/* Add New Event */}
-        <div>
+        <AddEventForm onSubmit={addEvent}>
           <h2>Add New Event</h2>
-          <input
+          <EventInput
             type="text"
             value={newEvent}
             onChange={(e) => setNewEvent(e.target.value)}
             placeholder="Enter Event"
           />
-          <button onClick={addEvent}>Add Event</button>
-          {error && <p>{error}</p>}
-        </div>
-        {/* List of Events */}
+          <AddEventButton type="submit">Add Event</AddEventButton>
+        </AddEventForm>
+        {error && <ErrorText>{error}</ErrorText>}
         <Events>
           <h2>Events</h2>
           {events.map((event, index) => (
