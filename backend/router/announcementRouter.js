@@ -4,7 +4,7 @@ import { getAllAnnouncements, createAnnouncement } from "../controllers/announce
 const router = express.Router();
 
 router.get('/getall', getAllAnnouncements);
-router.post('/create', createAnnouncement);
+router.post('/', createAnnouncement);
 
 
 export default router; 
