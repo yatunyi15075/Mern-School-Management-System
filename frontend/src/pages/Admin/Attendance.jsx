@@ -4,6 +4,7 @@ import Sidebar from './Sidebar'; // Import the Sidebar component
 
 const AttendanceContainer = styled.div`
   display: flex;
+  padding-left: 240px;
 `;
 
 const Content = styled.div`
