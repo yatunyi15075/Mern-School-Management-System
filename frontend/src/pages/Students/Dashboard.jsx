@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 
 const StudentDashboardContainer = styled.div`
   display: flex;
+  padding-left: 240px;
 `;
 
 const Content = styled.div`
