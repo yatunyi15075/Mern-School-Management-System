@@ -1,30 +1,14 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import Sidebar from './Sidebar'; // Import the Sidebar component
-
-const PerformanceContainer = styled.div`
-  display: flex;
-  padding-left: 240px;
-`;
-
-const Content = styled.div`
-  flex: 1;
-`;
-
-const PerformanceContent = styled.div`
-  padding: 20px;
-`;
-
-const PerformanceHeader = styled.h2`
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-
-const SchoolPerformance = styled.div`
-  margin-bottom: 20px;
-`;
-
-const IndividualPerformance = styled.div``;
+// Performance.js
+import React from 'react';
+import Sidebar from './Sidebar';
+import {
+  PerformanceContainer,
+  Content,
+  PerformanceContent,
+  PerformanceHeader,
+  SchoolPerformance,
+  IndividualPerformance,
+} from '../../styles/PerformanceStyles'; 
 
 const Performance = () => {
   // Sample data for school performance
