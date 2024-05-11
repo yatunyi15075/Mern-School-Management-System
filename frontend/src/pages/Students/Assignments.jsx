@@ -1,57 +1,17 @@
+// StudentAssignments.js
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import Sidebar from './Sidebar';
 import axios from 'axios';
-
-const AssignmentsContainer = styled.div`
-  display: flex;
-`;
-
-const SidebarContainer = styled.div`
-  flex: 0 0 250px;
-`;
-
-const Content = styled.div`
-  flex: 1;
-  padding: 20px;
-`;
-
-const AssignmentCard = styled.div`
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-  width: 100%;
-  max-width: 600px;
-`;
-
-const AssignmentTitle = styled.h3`
-  margin-bottom: 10px;
-`;
-
-const AssignmentDescription = styled.p`
-  color: #555;
-  margin-bottom: 15px;
-`;
-
-const AssignmentButton = styled.button`
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
-
-const AssignmentDoneMessage = styled.p`
-  color: #28a745;
-  font-weight: bold;
-`;
+import {
+  AssignmentsContainer,
+  SidebarContainer,
+  Content,
+  AssignmentCard,
+  AssignmentTitle,
+  AssignmentDescription,
+  AssignmentButton,
+  AssignmentDoneMessage,
+} from '../../styles/AssignmentsStyles'; // Import styled components from AssignmentStyles.js
 
 const StudentAssignments = () => {
   const [assignments, setAssignments] = useState([]);
