@@ -1,105 +1,48 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+// SettingsProfile.js
+import React from 'react';
 import Sidebar from './Sidebar';
-
-const SettingsProfileContainer = styled.div`
-  display: flex;
-`;
-
-const Content = styled.div`
-  flex: 1;
-  padding: 20px;
-`;
-
-const ProfileSection = styled.div`
-  margin-bottom: 20px;
-`;
-
-const ProfileForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
-const ProfileLabel = styled.label`
-  margin-bottom: 10px;
-`;
-
-const ProfileInput = styled.input`
-  margin-bottom: 10px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-const ProfileButton = styled.button`
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
+import {
+  ProfileContainer,
+  SidebarContainer,
+  Content,
+  ProfileHeader,
+  ProfileDetails,
+  ProfileLabel,
+  ProfileInfo,
+  EditButton,
+} from '../../styles/SettingsProfileStyles'; // Import styled components from SettingsProfileStyles.js
 
 const SettingsProfile = () => {
-  const [profileData, setProfileData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    profilePhoto: '',
-    // Add other profile details here
-  });
-
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Submit profile data
-    console.log('Submitted:', profileData);
-  };
-
-  // Function to handle input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProfileData({ ...profileData, [name]: value });
+  const teacherInfo = {
+    name: 'John Doe',
+    email: 'johndoe@example.com',
+    phone: '123-456-7890',
+    address: '123 Main St, City, Country',
+    qualification: 'Master of Education',
   };
 
   return (
-    <SettingsProfileContainer>
-      <Sidebar />
+    <ProfileContainer>
+      <SidebarContainer>
+        <Sidebar />
+      </SidebarContainer>
       <Content>
-        <h1>Settings & Profile</h1>
-        {/* Profile Section */}
-        <ProfileSection>
-          <h2>Profile</h2>
-          <ProfileForm onSubmit={handleSubmit}>
-            <ProfileLabel>First Name:</ProfileLabel>
-            <ProfileInput
-              type="text"
-              name="firstName"
-              value={profileData.firstName}
-              onChange={handleChange}
-            />
-            <ProfileLabel>Last Name:</ProfileLabel>
-            <ProfileInput
-              type="text"
-              name="lastName"
-              value={profileData.lastName}
-              onChange={handleChange}
-            />
-            <ProfileLabel>Email:</ProfileLabel>
-            <ProfileInput
-              type="email"
-              name="email"
-              value={profileData.email}
-              onChange={handleChange}
-            />
-            {/* Add more profile details and fields */}
-            <ProfileButton type="submit">Save Profile</ProfileButton>
-          </ProfileForm>
-        </ProfileSection>
-        {/* Add more sections for other settings */}
+        <ProfileHeader>Profile Details</ProfileHeader>
+        <ProfileDetails>
+          <ProfileLabel>Name:</ProfileLabel>
+          <ProfileInfo>{teacherInfo.name}</ProfileInfo>
+          <ProfileLabel>Email:</ProfileLabel>
+          <ProfileInfo>{teacherInfo.email}</ProfileInfo>
+          <ProfileLabel>Phone:</ProfileLabel>
+          <ProfileInfo>{teacherInfo.phone}</ProfileInfo>
+          <ProfileLabel>Address:</ProfileLabel>
+          <ProfileInfo>{teacherInfo.address}</ProfileInfo>
+          <ProfileLabel>Qualification:</ProfileLabel>
+          <ProfileInfo>{teacherInfo.qualification}</ProfileInfo>
+        </ProfileDetails>
+        <EditButton>Edit Profile</EditButton>
       </Content>
-    </SettingsProfileContainer>
+    </ProfileContainer>
   );
 };
 
