@@ -1,46 +1,17 @@
+// AnnouncementSection.js
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import Sidebar from './Sidebar';
 import axios from 'axios';
-
-const AnnouncementContainer = styled.div`
-  display: flex;
-`;
-
-const SidebarContainer = styled.div`
-  flex: 0 0 250px; /* Sidebar width */
-`;
-
-const Content = styled.div`
-  flex: 1;
-  padding: 20px;
-`;
-
-const AnnouncementHeader = styled.h1`
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-
-const AnnouncementList = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const AnnouncementItem = styled.li`
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-`;
-
-const AnnouncementTitle = styled.h3`
-  margin-bottom: 10px;
-`;
-
-const AnnouncementContent = styled.p`
-  color: #555;
-`;
+import {
+  AnnouncementContainer,
+  SidebarContainer,
+  Content,
+  AnnouncementHeader,
+  AnnouncementList,
+  AnnouncementItem,
+  AnnouncementTitle,
+  AnnouncementContent,
+} from '../../styles/AnnouncementStyles'; 
 
 const AnnouncementSection = () => {
   const [announcements, setAnnouncements] = useState([]);
