@@ -1,49 +1,17 @@
+// Exam.js
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import Sidebar from './Sidebar';
 import axios from 'axios';
-
-const ExamContainer = styled.div`
-  display: flex;
-`;
-
-const SidebarContainer = styled.div`
-  flex: 0 0 250px;
-`;
-
-const Content = styled.div`
-  flex: 1;
-  padding: 20px;
-`;
-
-const ExamHeader = styled.h1`
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-
-const ExamForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-`;
-
-const FormLabel = styled.label`
-  margin-bottom: 10px;
-`;
-
-const FormInput = styled.input`
-  padding: 8px;
-  margin-bottom: 20px;
-`;
-
-const AddButton = styled.button`
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
+import {
+  ExamContainer,
+  SidebarContainer,
+  Content,
+  ExamHeader,
+  ExamForm,
+  FormLabel,
+  FormInput,
+  AddButton,
+} from '../../styles/ExamStyles';
 
 const Exam = () => {
   const [examData, setExamData] = useState([]);
@@ -68,7 +36,6 @@ const Exam = () => {
       console.error('Error fetching exams:', error);
     }
   };
-  
 
   const handleAddExam = async (e) => {
     e.preventDefault();
