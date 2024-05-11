@@ -1,65 +1,19 @@
+// Assignments.js
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import Sidebar from './Sidebar'; // Import the Sidebar component
+import Sidebar from './Sidebar';
 import axios from 'axios';
-
-const AssignmentsContainer = styled.div`
-  display: flex;
-  padding-left: 240px;
-`;
-
-const Content = styled.div`
-  flex: 1;
-`;
-
-const AssignmentsContent = styled.div`
-  padding: 20px;
-`;
-
-const AssignmentsHeader = styled.h2`
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-
-const AssignmentList = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const AssignmentItem = styled.li`
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  padding: 10px 20px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-const AddAssignmentForm = styled.form`
-  margin-bottom: 20px;
-`;
-
-const AddAssignmentInput = styled.input`
-  padding: 8px;
-  margin-right: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-const AddAssignmentTextArea = styled.textarea`
-  padding: 8px;
-  margin-right: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-const AddAssignmentButton = styled.button`
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
+import {
+  AssignmentsContainer,
+  Content,
+  AssignmentsContent,
+  AssignmentsHeader,
+  AssignmentList,
+  AssignmentItem,
+  AddAssignmentForm,
+  AddAssignmentInput,
+  AddAssignmentTextArea,
+  AddAssignmentButton,
+} from '../../styles/AssignmentsStyles';
 
 const Assignments = () => {
   const [newAssignment, setNewAssignment] = useState({ title: '', description: '', grade: '', deadline: '' });
@@ -83,6 +37,7 @@ const Assignments = () => {
     if (newAssignment.title.trim() !== '' && newAssignment.description.trim() !== '' && newAssignment.grade.trim() !== '' && newAssignment.deadline.trim() !== '') {
       try {
         const response = await axios.post('http://localhost:4000/api/v1/assignments', newAssignment);
+        // fetchAssignments();
         setAssignments([...assignments, response.data.assignment]);
         setNewAssignment({ title: '', description: '', grade: '', deadline: '' });
       } catch (error) {
@@ -93,7 +48,7 @@ const Assignments = () => {
 
   return (
     <AssignmentsContainer>
-      <Sidebar /> {/* Include the Sidebar component */}
+      <Sidebar />
       <Content>
         <AssignmentsContent>
           <AssignmentsHeader>Assignments</AssignmentsHeader>
