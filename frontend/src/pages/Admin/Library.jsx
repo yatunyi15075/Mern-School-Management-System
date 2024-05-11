@@ -1,84 +1,22 @@
+// Library.js
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import Sidebar from './Sidebar';
 import axios from 'axios';
-
-const LibraryContainer = styled.div`
-  display: flex;
-  padding-left: 240px;
-`;
-
-const Content = styled.div`
-  flex: 1;
-  padding: 20px;
-`;
-
-const Title = styled.h1`
-  margin-bottom: 20px;
-`;
-
-const AddBookForm = styled.form`
-  margin-bottom: 20px;
-`;
-
-const FormGroup = styled.div`
-  margin-bottom: 10px;
-`;
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: 5px;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-const Button = styled.button`
-  padding: 8px 16px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
-
-const BookList = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const BookItem = styled.li`
-  margin-bottom: 10px;
-`;
-
-const BookTitle = styled.span`
-  font-weight: bold;
-`;
-
-const BookAuthor = styled.span`
-  margin-left: 10px;
-`;
-
-const ActionButton = styled.button`
-  margin-left: 10px;
-  padding: 4px 8px;
-  font-size: 14px;
-  background-color: #28a745;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #218838;
-  }
-`;
+import {
+  LibraryContainer,
+  Content,
+  Title,
+  AddBookForm,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  BookList,
+  BookItem,
+  BookTitle,
+  BookAuthor,
+  ActionButton,
+} from '../../styles/LibraryStyles';
 
 const Library = () => {
   const [books, setBooks] = useState([]);
