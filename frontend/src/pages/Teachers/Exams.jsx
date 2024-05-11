@@ -1,48 +1,9 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+// CheckExamSection.js
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Sidebar from './Sidebar';
-
-const ExamContainer = styled.div`
-  display: flex;
-`;
-
-const SidebarContainer = styled.div`
-  flex: 0 0 250px; /* Sidebar width */
-`;
-
-const Content = styled.div`
-  flex: 1;
-  padding: 20px;
-`;
-
-const ExamHeader = styled.h1`
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-
-const ExamForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-`;
-
-const FormLabel = styled.label`
-  margin-bottom: 10px;
-`;
-
-const FormInput = styled.input`
-  padding: 8px;
-  margin-bottom: 20px;
-`;
-
-const AddButton = styled.button`
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
+import { ExamContainer, SidebarContainer, Content, ExamHeader, ExamForm, FormLabel, FormInput, AddButton } 
+from '../../styles/ExamStyles'; 
 
 const CheckExamSection = () => {
   const [examData, setExamData] = useState([]);
@@ -51,14 +12,32 @@ const CheckExamSection = () => {
   const [className, setClassName] = useState('');
   const [marks, setMarks] = useState('');
 
-  const handleAddExam = (e) => {
+  useEffect(() => {
+    fetchExams(); // Fetch exams on component mount
+  }, []);
+
+  const fetchExams = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/v1/exam');
+      setExamData(response.data);
+    } catch (error) {
+      console.error('Error fetching exams:', error);
+    }
+  };
+
+  const handleAddExam = async (e) => {
     e.preventDefault();
     const newExam = { name, registrationNumber, className, marks: parseInt(marks) };
-    setExamData([...examData, newExam]);
-    setName('');
-    setRegistrationNumber('');
-    setClassName('');
-    setMarks('');
+    try {
+      const response = await axios.post('http://localhost:4000/api/v1/exam', newExam);
+      setExamData([...examData, response.data]);
+      setName('');
+      setRegistrationNumber('');
+      setClassName('');
+      setMarks('');
+    } catch (error) {
+      console.error('Error adding exam:', error);
+    }
   };
 
   const calculateTotalMarks = () => {
