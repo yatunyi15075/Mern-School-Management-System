@@ -1,44 +1,16 @@
-
+// ProfileSection.js
 import React from 'react';
-import styled from 'styled-components';
 import Sidebar from './Sidebar';
-
-const ProfileContainer = styled.div`
-  display: flex;
-`;
-
-const SidebarContainer = styled.div`
-  flex: 0 0 250px; /* Sidebar width */
-`;
-
-const Content = styled.div`
-  flex: 1;
-  padding: 20px;
-`;
-
-const ProfileHeader = styled.h1`
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-
-const ProfileInfo = styled.div`
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-`;
-
-const ProfileDetail = styled.div`
-  margin-bottom: 20px;
-`;
-
-const Label = styled.span`
-  font-weight: bold;
-`;
-
-const Value = styled.span`
-  margin-left: 10px;
-`;
+import {
+  ProfileContainer,
+  SidebarContainer,
+  Content,
+  ProfileHeader,
+  ProfileInfo,
+  ProfileDetail,
+  Label,
+  Value,
+} from '../../styles/SettingsProfileStyles'; // Import styled components from ProfileSectionStyles.js
 
 const ProfileSection = () => {
   // Sample student profile data
