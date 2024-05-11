@@ -1,59 +1,19 @@
+// Attendance.js
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import Sidebar from './Sidebar';
 import axios from 'axios';
-
-const AttendanceContainer = styled.div`
-  display: flex;
-  padding-left: 240px;
-`;
-
-const Content = styled.div`
-  flex: 1;
-`;
-
-const AttendanceContent = styled.div`
-  padding: 20px;
-`;
-
-const AttendanceHeader = styled.h2`
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-
-const AttendanceList = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const AttendanceItem = styled.li`
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-`;
-
-const StudentName = styled.span`
-  flex: 1;
-`;
-
-const CheckboxLabel = styled.label`
-  margin-right: 10px;
-`;
-
-const Divider = styled.hr`
-  margin-top: 5px;
-  border: 0;
-  border-top: 1px solid #ccc;
-`;
-
-const SubmitButton = styled.button`
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
+import {
+  AttendanceContainer,
+  Content,
+  AttendanceContent,
+  AttendanceHeader,
+  AttendanceList,
+  AttendanceItem,
+  StudentName,
+  CheckboxLabel,
+  Divider,
+  SubmitButton,
+} from '../../styles/AttendanceStyles';
 
 const Attendance = () => {
   const [students, setStudents] = useState([]);
