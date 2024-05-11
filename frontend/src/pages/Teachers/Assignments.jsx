@@ -1,92 +1,83 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+// AssignmentSection.js
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Sidebar from './Sidebar';
-
-const AssignmentContainer = styled.div`
-  display: flex;
-  padding-left: 240px;
-`;
-
-const SidebarContainer = styled.div`
-  flex: 0 0 250px; /* Sidebar width */
-`;
-
-const Content = styled.div`
-  flex: 1;
-  padding: 20px;
-`;
-
-const AssignmentHeader = styled.h1`
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-
-const AssignmentList = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const AssignmentItem = styled.li`
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-`;
-
-const SetAssignmentButton = styled.button`
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
+import { AssignmentsContainer, Content, AssignmentsContent, AssignmentsHeader, AssignmentList, AssignmentItem, AddAssignmentForm, 
+  AddAssignmentInput, AddAssignmentTextArea, AddAssignmentButton } from '../../styles/AssignmentsStyles'; 
 
 const AssignmentSection = () => {
-  // Sample assignment data
-  const [assignments, setAssignments] = useState([
-    { id: 1, title: 'Assignment 1', description: 'Write a short essay on a topic of your choice.', class: 'Class A', submissions: ['Student A', 'Student B'], marks: { 'Student A': 90, 'Student B': 85 } },
-    { id: 2, title: 'Assignment 2', description: 'Solve the math problems attached.', class: 'Class B', submissions: ['Student C', 'Student D'], marks: { 'Student C': 80, 'Student D': 75 } }
-  ]);
+  const [newAssignment, setNewAssignment] = useState({ title: '', description: '', grade: '', deadline: '' });
+  const [assignments, setAssignments] = useState([]);
 
-  const handleSetAssignment = () => {
-    // Implement set assignment functionality here
-    console.log('Setting assignment...');
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
+
+  const fetchAssignments = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/v1/assignments/getall');
+      setAssignments(response.data.assignments);
+    } catch (error) {
+      console.error('Error fetching assignments:', error);
+    }
   };
 
-  const handleMarkAssignment = (id, student, marks) => {
-    // Implement mark assignment functionality here
-    console.log(`Marking assignment ${id} for ${student} with marks: ${marks}`);
+  const handleAddAssignment = async (e) => {
+    e.preventDefault();
+    if (newAssignment.title.trim() !== '' && newAssignment.description.trim() !== '' && newAssignment.grade.trim() !== '' && newAssignment.deadline.trim() !== '') {
+      try {
+        const response = await axios.post('http://localhost:4000/api/v1/assignments', newAssignment);
+        setAssignments([...assignments, response.data.assignment]);
+        setNewAssignment({ title: '', description: '', grade: '', deadline: '' });
+      } catch (error) {
+        console.error('Error adding assignment:', error);
+      }
+    }
   };
 
   return (
-    <AssignmentContainer>
-      <SidebarContainer>
-        <Sidebar />
-      </SidebarContainer>
+    <AssignmentsContainer>
+      <Sidebar />
       <Content>
-        <AssignmentHeader>Assignments</AssignmentHeader>
-        <SetAssignmentButton onClick={handleSetAssignment}>Set Assignment</SetAssignmentButton>
-        <AssignmentList>
-          {assignments.map((assignment) => (
-            <AssignmentItem key={assignment.id}>
-              <h3>{assignment.title}</h3>
-              <p>{assignment.description}</p>
-              <p>Class: {assignment.class}</p>
-              <p>Submissions: {assignment.submissions.join(', ')}</p>
-              <p>Marks:</p>
-              <ul>
-                {Object.entries(assignment.marks).map(([student, marks]) => (
-                  <li key={student}>{student}: {marks}</li>
-                ))}
-              </ul>
-              <button onClick={() => handleMarkAssignment(assignment.id, 'Student A', 95)}>Mark Assignment</button>
-            </AssignmentItem>
-          ))}
-        </AssignmentList>
+        <AssignmentsContent>
+          <AssignmentsHeader>Assignments</AssignmentsHeader>
+          <AddAssignmentForm onSubmit={handleAddAssignment}>
+            <AddAssignmentInput
+              type="text"
+              placeholder="Enter assignment title"
+              value={newAssignment.title}
+              onChange={(e) => setNewAssignment({ ...newAssignment, title: e.target.value })}
+            />
+            <AddAssignmentTextArea
+              placeholder="Enter assignment description"
+              value={newAssignment.description}
+              onChange={(e) => setNewAssignment({ ...newAssignment, description: e.target.value })}
+            />
+            <AddAssignmentInput
+              type="text"
+              placeholder="Enter assignment grade"
+              value={newAssignment.grade}
+              onChange={(e) => setNewAssignment({ ...newAssignment, grade: e.target.value })}
+            />
+            <AddAssignmentInput
+              type="text"
+              placeholder="Enter assignment deadline"
+              value={newAssignment.deadline}
+              onChange={(e) => setNewAssignment({ ...newAssignment, deadline: e.target.value })}
+            />
+            <AddAssignmentButton type="submit">Add Assignment</AddAssignmentButton>
+          </AddAssignmentForm>
+          <AssignmentList>
+            {assignments.map((assignment) => (
+              <AssignmentItem key={assignment.id}>
+                <strong>{assignment.title}: </strong>
+                {assignment.description}, {assignment.grade}, {assignment.deadline}
+              </AssignmentItem>
+            ))}
+          </AssignmentList>
+        </AssignmentsContent>
       </Content>
-    </AssignmentContainer>
+    </AssignmentsContainer>
   );
 };
 
