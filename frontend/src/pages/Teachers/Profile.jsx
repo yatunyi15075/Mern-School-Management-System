@@ -1,45 +1,8 @@
+// TeacherProfileSection.js
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import Sidebar from './Sidebar';
-
-const ProfileContainer = styled.div`
-  display: flex;
-`;
-
-const SidebarContainer = styled.div`
-  flex: 0 0 250px; /* Sidebar width */
-`;
-
-const Content = styled.div`
-  flex: 1;
-  padding: 20px;
-`;
-
-const ProfileHeader = styled.h1`
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-
-const ProfileDetails = styled.div`
-  max-width: 400px;
-`;
-
-const ProfileLabel = styled.label`
-  font-weight: bold;
-`;
-
-const ProfileInfo = styled.p`
-  margin-bottom: 10px;
-`;
-
-const EditButton = styled.button`
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
+import { ProfileContainer, SidebarContainer, Content, ProfileHeader, ProfileDetails, ProfileLabel, ProfileInfo, EditButton } 
+from '../../styles/SettingsProfileStyles'; 
 
 const TeacherProfileSection = () => {
   const [teacherInfo, setTeacherInfo] = useState({
