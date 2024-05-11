@@ -1,73 +1,68 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+// CheckAnnouncementSection.js
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Sidebar from './Sidebar';
-
-const AnnouncementContainer = styled.div`
-  display: flex;
-  padding-left: 240px;
-`;
-
-const SidebarContainer = styled.div`
-  flex: 0 0 250px; /* Sidebar width */
-`;
-
-const Content = styled.div`
-  flex: 1;
-  padding: 20px;
-`;
-
-const AnnouncementHeader = styled.h1`
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-
-const AnnouncementList = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const AnnouncementItem = styled.li`
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-`;
-
-const AddAnnouncementButton = styled.button`
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
+import { AnnouncementContainer, Content, Title, AnnouncementForm, FormGroup, Label, TextArea, Button, AnnouncementList, AnnouncementItem, 
+  AnnouncementContent } from '../../styles/AnnouncementStyles';
 
 const CheckAnnouncementSection = () => {
-  // Sample announcement data
-  const [announcements, setAnnouncements] = useState([
-    { id: 1, title: 'Important Announcement', message: 'This is an important announcement from the administration.' },
-    { id: 2, title: 'Class Announcement', message: 'Reminder: Tomorrow is the deadline for the assignment.' }
-  ]);
+  const [announcement, setAnnouncement] = useState('');
+  const [announcements, setAnnouncements] = useState([]);
+  const [error, setError] = useState(null);
 
-  const handleAddAnnouncement = () => {
-    // Implement add announcement functionality here
-    console.log('Adding announcement...');
+  const fetchAnnouncements = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/v1/announcements/getall');
+      setAnnouncements(response.data.announcements);
+    } catch (error) {
+      console.error('Error fetching announcements:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAnnouncements();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:4000/api/v1/announcements', {
+        announcement: announcement,
+      });
+      console.log('Announcement sent:', response.data);
+      setAnnouncement('');
+      fetchAnnouncements();
+    } catch (error) {
+      console.error('Error sending announcement:', error);
+      setError('Error sending announcement');
+    }
   };
 
   return (
     <AnnouncementContainer>
-      <SidebarContainer>
-        <Sidebar />
-      </SidebarContainer>
+      <Sidebar />
       <Content>
-        <AnnouncementHeader>Announcements</AnnouncementHeader>
-        <AddAnnouncementButton onClick={handleAddAnnouncement}>Add Announcement</AddAnnouncementButton>
+        <Title>Announcement</Title>
+        <AnnouncementForm onSubmit={handleSubmit}>
+          <FormGroup>
+            <Label htmlFor="announcement">Announcement:</Label>
+            <TextArea
+              id="announcement"
+              value={announcement}
+              onChange={(e) => setAnnouncement(e.target.value)}
+              required
+              rows={4}
+              cols={50}
+            />
+          </FormGroup>
+          <Button type="submit">Send Announcement</Button>
+        </AnnouncementForm>
+
+        <h2>Announcements</h2>
         <AnnouncementList>
           {announcements.map((announcement) => (
-            <AnnouncementItem key={announcement.id}>
-              <h3>{announcement.title}</h3>
-              <p>{announcement.message}</p>
+            <AnnouncementItem key={announcement._id}>
+              <AnnouncementContent>{announcement.announcement}</AnnouncementContent>
             </AnnouncementItem>
           ))}
         </AnnouncementList>
