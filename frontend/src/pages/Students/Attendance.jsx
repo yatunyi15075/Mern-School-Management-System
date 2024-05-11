@@ -1,46 +1,9 @@
+// AttendanceSection.js
 import React from 'react';
-import styled from 'styled-components';
 import Sidebar from './Sidebar';
-
-const AttendanceContainer = styled.div`
-  display: flex;
-`;
-
-const SidebarContainer = styled.div`
-  flex: 0 0 250px; /* Sidebar width */
-`;
-
-const Content = styled.div`
-  flex: 1;
-  padding: 20px;
-`;
-
-const AttendanceHeader = styled.h1`
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-
-const AttendanceList = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const AttendanceItem = styled.li`
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-`;
-
-const AttendanceDate = styled.span`
-  font-weight: bold;
-`;
-
-const AttendanceStatus = styled.span`
-  margin-left: 10px;
-  color: ${({ present }) => (present ? 'green' : 'red')};
-`;
+import { AttendanceContainer, SidebarContainer, Content, AttendanceHeader, AttendanceList, AttendanceItem, 
+  AttendanceDate, AttendanceStatus } 
+  from '../../styles/AttendanceStyles'; 
 
 const AttendanceSection = () => {
   // Sample attendance data
