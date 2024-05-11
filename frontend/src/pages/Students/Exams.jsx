@@ -1,50 +1,20 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useRef } from 'react';
 import Sidebar from './Sidebar';
-import { Bar } from 'react-chartjs-2';
-
-const ExamContainer = styled.div`
-  display: flex;
-`;
-
-const SidebarContainer = styled.div`
-  flex: 0 0 250px; /* Sidebar width */
-`;
-
-const Content = styled.div`
-  flex: 1;
-  padding: 20px;
-`;
-
-const ExamHeader = styled.h1`
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-
-const ExamResultsContainer = styled.div`
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-`;
-
-const ExamSubject = styled.h3`
-  margin-bottom: 10px;
-`;
-
-const ExamResult = styled.p`
-  color: #555;
-  margin-bottom: 10px;
-`;
-
-const ExamChartContainer = styled.div`
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-`;
+import { Bar } from 'react-chartjs-2'; 
+import {
+  ExamContainer,
+  SidebarContainer,
+  Content,
+  ExamHeader,
+  ExamResultsContainer,
+  ExamSubject,
+  ExamResult,
+  ExamChartContainer,
+} from '../../styles/ExamStyles'; 
 
 const ExamSection = () => {
+  const chartRef = useRef(null);
+
   // Sample exam results data
   const examResultsData = {
     subjects: ['Math', 'Science', 'English', 'History'],
@@ -67,6 +37,17 @@ const ExamSection = () => {
     ]
   };
 
+  // Chart options
+  const chartOptions = {
+    scales: {
+      y: {
+        type: 'linear',
+        beginAtZero: true,
+        max: 100
+      }
+    }
+  };
+
   return (
     <ExamContainer>
       <SidebarContainer>
@@ -83,17 +64,9 @@ const ExamSection = () => {
           ))}
           <ExamChartContainer>
             <Bar
+              ref={chartRef}
               data={barChartData}
-              options={{
-                scales: {
-                  yAxes: [{
-                    ticks: {
-                      beginAtZero: true,
-                      max: 100
-                    } 
-                  }]
-                }
-              }}
+              options={chartOptions}
             />
           </ExamChartContainer>
         </ExamResultsContainer>
