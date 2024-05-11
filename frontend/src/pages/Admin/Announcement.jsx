@@ -1,65 +1,20 @@
+// Announcement.js
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import Sidebar from './Sidebar';
 import axios from 'axios';
-
-const AnnouncementContainer = styled.div`
-  display: flex;
-  padding-left: 240px;
-`;
-
-const Content = styled.div`
-  flex: 1;
-  padding: 20px;
-`;
-
-const Title = styled.h1`
-  margin-bottom: 20px;
-`;
-
-const AnnouncementForm = styled.form`
-  margin-bottom: 20px;
-`;
-
-const FormGroup = styled.div`
-  margin-bottom: 10px;
-`;
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: 5px;
-`;
-
-const TextArea = styled.textarea`
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-const Button = styled.button`
-  padding: 8px 16px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
-
-const AnnouncementList = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const AnnouncementItem = styled.li`
-  margin-bottom: 10px;
-`;
-
-const AnnouncementContent = styled.p`
-  font-size: 16px;
-`;
+import {
+  AnnouncementContainer,
+  Content,
+  Title,
+  AnnouncementForm,
+  FormGroup,
+  Label,
+  TextArea,
+  Button,
+  AnnouncementList,
+  AnnouncementItem,
+  AnnouncementContent,
+} from '../../styles/AnnouncementStyles';
 
 const Announcement = () => {
   // State for managing announcement
