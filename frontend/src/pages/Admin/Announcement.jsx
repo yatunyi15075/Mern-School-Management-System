@@ -1,7 +1,8 @@
-// Announcement.js
 import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   AnnouncementContainer,
   Content,
@@ -20,7 +21,6 @@ const Announcement = () => {
   // State for managing announcement
   const [announcement, setAnnouncement] = useState('');
   const [announcements, setAnnouncements] = useState([]);
-  const [error, setError] = useState(null);
 
   // Function to fetch announcements
   const fetchAnnouncements = async () => {
@@ -31,6 +31,7 @@ const Announcement = () => {
       console.error('Error fetching announcements:', error);
     }
   };
+  
 
   useEffect(() => {
     fetchAnnouncements();
@@ -43,18 +44,22 @@ const Announcement = () => {
         announcement: announcement, // Ensure that the key matches the backend model
       });
       console.log('Announcement sent:', response.data);
+      // Display success toast message
+      toast.success('Announcement sent successfully');
       // Clear the form
       setAnnouncement('');
       // Fetch announcements again to update the list
       fetchAnnouncements();
     } catch (error) {
       console.error('Error sending announcement:', error);
-      setError('Error sending announcement');
+      // Display error toast message
+      toast.error('Error sending announcement');
     }
   };
 
   return (
     <AnnouncementContainer>
+      <ToastContainer />
       <Sidebar />
       <Content>
         <Title>Announcement</Title>
