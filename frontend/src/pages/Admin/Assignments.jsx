@@ -1,7 +1,8 @@
-// Assignments.js
 import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   AssignmentsContainer,
   Content,
@@ -37,17 +38,23 @@ const Assignments = () => {
     if (newAssignment.title.trim() !== '' && newAssignment.description.trim() !== '' && newAssignment.grade.trim() !== '' && newAssignment.deadline.trim() !== '') {
       try {
         const response = await axios.post('http://localhost:4000/api/v1/assignments', newAssignment);
-        // fetchAssignments();
+        // Display success toast message
+        toast.success('Assignment added successfully');
+        // Add the new assignment to the list
         setAssignments([...assignments, response.data.assignment]);
+        // Clear the form
         setNewAssignment({ title: '', description: '', grade: '', deadline: '' });
       } catch (error) {
         console.error('Error adding assignment:', error);
+        // Display error toast message
+        toast.error('Error adding assignment');
       }
     }
   };
 
   return (
     <AssignmentsContainer>
+      <ToastContainer />
       <Sidebar />
       <Content>
         <AssignmentsContent>
