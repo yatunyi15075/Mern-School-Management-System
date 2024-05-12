@@ -16,6 +16,9 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-export const Admin = mongoose.model('Admin', userSchema);
-export const Student = mongoose.model('Student', userSchema);
-export const Teacher = mongoose.model('Teacher', userSchema);
+// export const Admin = mongoose.model('Admin Register', userSchema);
+export const AdminLogin = mongoose.model('Admin Login', userSchema);
+export const Student = mongoose.model('Student Login', userSchema);
+export const Teacher = mongoose.model('Teacher Login', userSchema);
+
+
