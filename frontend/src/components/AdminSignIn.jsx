@@ -1,15 +1,26 @@
-// AdminSignIn.js
 import React, { useState } from 'react';
 import { AdminSignInContainer, FormContainer, InputField, SubmitButton } from '../styles/AdminSignInStyles';
+import axios from 'axios';
 
 const AdminSignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignIn = () => {
-    // For demonstration purposes, we'll directly navigate to the admin dashboard route
-    // Replace this with your actual sign-in logic
-    console.log('Admin Sign In:', { email, password });
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const response = await axios.post('http://localhost:4000/api/v1/users/signin', { email, password }); 
+      if (response.status === 200) {
+        // Sign-in successful, redirect to admin dashboard
+        window.location.href = '/admin/dashboard';
+      } else {
+        // Handle sign-in errors
+        console.error('Sign-in failed');
+      }
+    } catch (error) {
+      console.error('Error during sign-in:', error);
+    }
   };
 
   return (
@@ -30,8 +41,7 @@ const AdminSignIn = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         /> 
-        {/* Use Link component to navigate to admin dashboard */}
-        <SubmitButton to="/admin/dashboard" onClick={handleSignIn}>Sign In</SubmitButton>
+        <SubmitButton onClick={handleSignIn}>Sign In</SubmitButton>
       </FormContainer>
     </AdminSignInContainer>
   );
